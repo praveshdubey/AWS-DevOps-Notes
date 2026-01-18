@@ -1,0 +1,1312 @@
+=================25-08-2025==== Session 1=======================>
+
+1) Introduction :-
+-----------------------
+
+=================26-08-2025==== Session 2=======================>
+
+2) WHAT IS CLOUD ?
+----------------------------
+3) TYPES OF CLOUD COMPUTING:
+-----------------------------------------------
+   1. PUBLIC CLOUD                : CLOUD THAT IS AVAILABE FOR ANY COMPANY
+   2. PRIVATE CLOUD              : CLOUD THAT IS AVAILABE FOR SOME COMPANY
+   3. HYBRID CLOUD               : PUBLIC CLOUD + PRIVATE CLOUD
+   4. COMMUNITY CLOUD   : MULTIPLE PEOPLE CAN USE SAME CLOUD RESOURCES
+
+    i) public cloud: aws, azure, gcp
+    II) private cloud: IBM, oracle, dell, tenecent
+    III) hybrid cloud: aws, IBM, dell, gcp -----
+4) how to create server (EC2)
+5) Software architecture (SDLC)
+
+=================27-08-2025==== =============================>
+
+NOTE: ON 27th august no session 
+
+=================28-08-2025==== Session 3=======================>
+
+6) SOFTWARE ARCHITECTURE: BULEPRINT OF APPLICATION:
+----------------------------------------------------------------------------------
+
+
+TYPES OF ARCHITECTURE:
+1. ONE-TIER
+2. TWO-TIER
+3. THREE-TIER
+4. N-TIER
+
+ WEB-SERVER:- PRESENTATION LAYER
+                         PURPOSE        : TO SHOW THE APP
+                         WHO        : UI/UX (FRONTEND)
+                         WHAT        : WEB TECHNOLOGIES
+                         EX        : HTML, CSS, JS
+APP-SERVER:
+                        AKA        : BUSINESS/LOGIC LAYER
+                        PURPOSE        : TO SHOW USE APP
+                        WHO        : BACKEND DEVELOPERS
+                        WHAT        : PROGRAMMING
+                        EX        : JAVA, PYTHON, C, C++
+DB-SERVER:
+                        AKA        : DATA LAYER
+                        PURPOSE        : TO STORE/RETRIVE DATA
+                        WHO        : DBA/DBD
+                        WHAT        : DB LANGAUGES
+                        EX        : MYSQL, SQL, ORACLE, POSTGRES ----
+
+=================29-08-2025==== Session 4=======================>
+
+7) How to create server (EC2):
+-----------------------------------------
+    Step1 :-  NAME & TAGS
+    Step2 :-  AMAZON MACHINE IMAGE (Exa: OPERATING SYSTEM)
+    Step3 :-  INSTANCE TYPE (CPU & RAM)
+    Step4 :-  KEY-PAIR (PUBLIC KEY & PRIVATE KEY)
+    Step5 :-  NETWORK & SECURITY 
+                  VPC: VIRTUAL PRIVATE CLOUD
+                  FIREWALL:- FIREWALL (SSH: SECURE SHELL : 22, HTTP: 8O, HTTPS : 443)
+    Step6 :-  STORAGE
+                  EBS: ELASTIC BLOCK STORAGE (TO PROVIDE STORAGE FOR THE SERVER DEFAULT: 8GB   MAX: 16 TB)
+    Step7 :-  ADVANCE DETAILS
+              SCRIPTS: write a script in this section ans hit create or lanch button to lanch server
+    Step8 :-  copy IP address and paste into browswer app will work. 
+
+=================01-09-2025==== Session 5=======================>
+
+8) S3 Storage:
+------------------
+
+i ) WHAT IS S3 => 
+ -> Amazon S3 is a Simple Storage Service 
+  -> stores objects like files, Photos, Audio, Videos 
+  -> providing more scalability and security to. 
+  -> It allows the users to store and retrieve .
+  -> Many companies use s3 to store customers data.
+  -> it has infinite scaling capacity. 
+
+ii ) ADVANTAGES =>
+  -> To store all types of Data
+  -> Static web hosting
+  -> Big Data Analytics
+  -> Backup and Recovery
+  -> Highly scalable & Flexible
+  -> Low Cost
+
+iii ) ATRRIBUTES=>
+  -> Key
+  -> Version ID
+  -> Value
+  -> Metadata
+  -> Access control information
+  -> Tags
+
+iv ) HOW MUCH IS FREE=> 
+  -> There is a limit of 100 buckets per AWS account(exp)
+  -> But it can be increased if requested by AWS support.
+  -> The maximum size of an AWS S3 bucket is 5 GB.
+
+v ) WAYS TO UPLOAD FILES=> 
+  -> GUI
+  -> CLI
+  -> API
+  -> SDK
+
+vi ) RULES=> 
+  -> 3 (min) and 63 (max) characters long.
+  -> can consist only of lowercase letters, numbers, 
+  -> dots (.), and hyphens (-).
+  -> must begin and end with a letter or number.
+  -> Bucket names must not contain two adjacent periods.
+  -> Bucket names must not be formatted as an IP address 
+ -> (for example, 192.168.5.4).
+
+9) VERSIONING=> 
+------------------------
+  -> Versioning means Copy of a Object.
+ ->  If You delete a file we can retrive using Versioning.
+  -> By default it will be disabled.
+  -> Each file will have Different Version Id.
+  -> You can always restore the previous version.
+
+10) How to create S3 bucket:
+---------------------------------------
+    Step 1: Go to S3 and click on this
+    Step 2: Click on the "Create Bucket"
+    Step 3: Give Bucket name 
+    Step 4: Enable and Disable Bucket Versioning (for backup)
+    Step 5: and click on the Create button and do not make the changes any other option  
+    Step 6: Now my s3 bucket will be created
+
+11) Presigned Image URL:
+-----------------------------------
+      - Presigned Image URL is that URL where we can give time limit to show the image on the URL once time limit end it will not be visible.
+      
+      Step 1: Click on the image checkbox
+      Step 2: Click on the Action and go to Presigned URL
+      Step 3: give the time limit (min/hr)
+      Step 4: finaly click on the Create  Presigned URL.
+
+=================02-09-2025==== Session 6=======================>
+
+CRR OR data sharing:
+-----------------------------
+
+12) CRR: Cross resion Replication.:
+-----------------------------------------------
+   -> CRR stands for Cross-Region Replication, a feature that automatically replicates Amazon S3 objects and their metadata from one AWS region to another.
+
+13) Batch Operations:
+------------------------------
+      -> When we perform same operation with multiple file the it is called Batch Operations.
+
+14) How to create CRR:
+--------------------------------
+Step 1: 1st create two bucket in two different region. while creating bucket versioning has to be enabled.
+Step 2: Go to 1st bucket --> go to management --> Click on the "Create replication rule" button.
+Step 3: Give "Replication rule name" name and status will be Enabled.
+step 4: Choose a rule scope as "Apply to all objects in the bucket".
+Step 5: select Destination bucket by clicking on "Browse S3" --> after Choosing a bucket click on the "Choose path".
+Step 6: after above process my CRR is done  
+
+
+15) Storage classes or (Life cycle rule):
+----------------------------------------------------
+-> By help of the storage clases we can reduce the cost of the storage.
+
+i) Types of Storage classes:
+-> Standard
+-> AI (infrequent access)
+-> One Zone
+-> Glacier
+
+ii) How to create storage classes
+-> Step 1: Open bucket --> go to management
+-> Step 2: Click on the "Create lifecycle rule".
+-> Step 3: Give Lifecycle rule name and Choose a rule scope as "Apply to all objects in the bucket".
+-> Step 4: Go to Lifecycle rule actions section and Click on the Transition current versions of objects between storage classes Checkbox.
+-> Step 5: Go to "Transition current versions of objects between storage classes" section and "Choose storage class transitions" and "Days after object creation".
+-> Step 6: Click on Create rule.
+
+
+=================03-09-2025==== Session 7=======================>
+
+16) Web Server:
+-------------
+-> Web servers like Apache and Nginx are fundamental software applications that deliver web content to users over the internet. They act as intermediaries between client web browsers and the server where website files are stored. When a user requests a webpage, the web server processes that request, retrieves the necessary files (like HTML, CSS, JavaScript, images), and sends them back to the user's browser.
+
+i) Type of Web server:
+     -> Apache 
+     -> Ngnix
+     -> IIS
+
+ii) How to create Application by Apache webser by ubuntu.
+    Step 1:  website: https://killercoda.com/
+    Step 2:  select playground
+    Step 3:  select ubuntu
+    Step 4: give below code one-by-one
+                -> apt update                
+                -> apt install apache2 -y        
+                -> git clone https://github.com/Ironhack-Archive/online-clone-amazon.git
+                -> mv online-clone-amazon/* /var/www/html
+    Step 5:  One all above step done then click on the "trafix and port" in the top right humburger.
+    Step 6:  Click on the Common Ports 80 and then my app will open Exa: https://546b56424455-10-244-5-62-80.papa.r.killercoda.com/
+
+iii) How to create Application by AWS
+    Step 1:  Ceate a server in EC2
+    Step 2:  click on the server checkbox and click on the connect --> then again click on the connect.
+    Step 3: give below code one-by-one
+                -> sudo -i
+                -> apt update                
+                -> apt install apache2 -y (for apache)  |  apt install nginx  -y (for ngnix)
+                -> git clone https://github.com/Ironhack-Archive/online-clone-amazon.git
+                -> mv online-clone-amazon/* /var/www/html
+    Step 5:  take IP address and open in the browser.
+ 
+Clone URL:
+-> AMAZON: https://github.com/Ironhack-Archive/online-clone-amazon.git
+-> INSTAGRAM: https://github.com/leocosta1/instagram-clone.git
+-> WHATSAPP: https://github.com/hamsahmedansari/axiom-whatsapp-ui-homePage.git
+
+=================04-09-2025==== Session 8=======================>
+
+17) MULTI CLOUD:
+-------------------------
+->  Multi-cloud means a company uses two or more cloud providers—such as AWS, Azure, GCP, Etc To deploy the infrastructure & applications.
+
+i) ADVANTAGES:
+-> Avoid Vendor Lock-In
+-> High Availability
+->  Best-of-Breed Services
+-> Geographical Compliance
+
+ii) EC2 Termination protection:
+-> Termination protection prevents an instance from accidental termination. By default, this option is turned off for EC2 instances. Turn on this option to protect your instance from any unintentional termination.
+-> while creating instance we need to enable it in the Advanced details.
+
+=================05-09-2025==== Session 9=======================>
+
+18) Server migration:
+----------------------
+19) Disaster recovery:
+-----------------------
+20) AMI (AMAZON MACHINE IMAGE) :
+i) Advantage: An AMI (Amazon Machine Image) in AWS is a template used to launch virtual servers (EC2 instances) in the cloud like OS, server, S/w. 
+-> Disaster recovery
+-> backup
+-> Speed
+
+ii) CATEGORIES Of AMI:
+-> QUICK START    : AWS
+-> MY AMI         : YOU
+-> MARKET PLACE   : TO SELL OUR AMIS
+-> COMMUNITY      : WE CAN USE OTHER PEOPLE AMI FOR FREE        
+
+iii) How to migrate server from one resion to another resion.
+
+Step 1: 1st Create a Server By EC2 and give script in the 1st server on Mumbai (or any other resion).
+Step 2: Click on the server checkbox and click on the action --> Image and template --> Create image.
+Step 3: Give image name in the "Image details".
+Step 4: once image is created go to --> AMI 
+Step 5: go to ami -> Copy AMI --> give AMI copy name -->Destination Region --> click on "Copy AMI".
+Step 6: new link will be generated click on that link it will redirect with new 
+Step 7: In the newly created AMI click on the AMI checkbox and click on the --> Launch instance from AMI.
+Step 8: give name in the "Name and tags" section. and Instance type and key-pair and allow ports (ssh, http, https) from Network settings
+Step 9: Important Note : here we will not give script because we have lready given script in the image.
+Step 10: here our server completed copy the IP Address and open in new tab , here we will see newly app.
+
+
+
+=================06-09-2025==== Session 10=======================>
+
+1)Practice session of  server migration
+2) GCP and azure practice.
+
+=================08-09-2025==== Session 11=======================>
+
+21) ELP (Elastic load balancer):
+------------------------------------------
+-> Elastic Load Balancing (ELB) in AWS automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, and IP addresses, in one or more Availability Zones.
+
+i) How to create ELB (elastic load balancer):
+Step 1: 1st create 2 or more server server with same application script.
+Step 2: Go to load balancer --> select the Load balancers --> click on the create load balencer.
+Step 3: Now click on the Create button of the Application Load Balancer.
+Step 4: Give Basic configuration like any name, Scheme as Internet-facing, and select Availability Zones and subnets, In Security groups select & all. and also select  (WAF) rest as it is.
+Step 5: In the Listeners and routing section click on the "Create target group " it will redirect to new tab and create target group.
+Step 6: In Basic configuration select instance, -> give Target group name (any name)--> Click on the next.
+Step 7: Now select all or whet ever server we want to give to ELB in Available instances. --> and click "Include as pending below" button
+Step 8: Now click on the "Create target group" button and go back to previous tab.
+Step 9: here refresh default action button in the "Create target group" section.
+Step 10: at the end click on the "Create load balancer" now ELB will be created copy DNS and paste into  new tab.
+
+
+
+ii) HOW TO ENABLE NEW AZ TO LB:
+-> SELECT LB
+-> NETWORK MAPPING
+-> EDIT
+-> SELECT 1-C SUBNET
+-> SAVE
+
+Note: PROVISIONING MEANS CREATING.
+
+
+iii) TYPES OF ALOGRTHMS:
+1. ROUND ROBIN (DEFAULT)
+2. STICKY ROUND ROBIN
+3. WEIGHTED
+4. IP/URL
+5. LEAST CONNECTIONS
+6. LEAST TIME
+7. RANDOM
+8. LEAST BAND WIDTH
+
+iv) HOW TO CHANGE ALOGORITHMS:
+SELECET TAGRGET GROUP -- > ATTRIBITES -- > Load balancing algorithm
+
+
+V) IMP POINTS:
+1. LB WORKS ON OSI MODEL.
+2. LB DISTRIBUTE TRAFFIC ON ALOGRITHEMS.
+3. DEAFULT ALOGORITHM FOR LB IS ROUND ROBIN.
+4. TO CREATE A LB ATLEAST WE NEED TO HAVE 2 SERVERS.
+5. IN REAL TIME SERVERS WILL AUTOMATIACLLY ADD TO LB.
+6. TO CREATE LB WE NEED TO SELECT ATLEAST 2 AZ (availability zone).
+
+TYPES OF ROUTING:
+1. HOST BASED ROUTING: www.train.paytm.com
+2. PATH BASED ROUTING: www.paytm.com/train, www.paytm.com/recharge
+
+=================09-09-2025==== Session 12=======================>
+
+22) ASG (Auto Scaling Groups):
+------------------------------
+--> IT IS A PROCESS OF ADDING/REMOVING SERVERS AUTOMATIC..
+--> WHEN LOAD IS INCRESED IT WILL ADD SERVERS
+--> WHEN LOAD IS DECREASED IT REMOVE SERVERS
+--> IT MAKE SURE ALWAYS MINIMU NUMBER OF
+--> SERVERS ARE RUNNING TO SERVER APPLICATION
+--> IF WE DELETE A SERVER ASG WILL RECREATE SAME SERVER.
+--> LOAD IS HIGH -- > ADD THE NEW SERVERS
+--> LOAD IS LOW  -- > TO DELETE EXISTING SERVERS
+
+i) WHEN WE USE AUTO SCALING GROUPS:
+   --> IF THE LOAD IS CHANGING FREQUENTLY WE CAN USE ASG.
+
+
+ii) TYPES OF SCALING:
+    1. HORIZONTAL SCALING : WE CREATE NEW SERVERS 
+    2. VERTICAL SCALING   : FOR EXISTING SERVERS WE CAN INCREASE CPU & RAM
+
+
+Note:-
+        --> WEB & APP : HORIZONTAL SCALING
+         --> DB        : VERTICAL SCALING
+
+23) VERTICAL SCALING
+      1. STOP SERVER
+      2. ACTIONS -- > INSTANCE SETTINGS -- > CHANGE INSTANCE TYPE -- > t2.medium
+      3. START SERVER
+
+24) Horizontal Scaling
+ --> AUTO SCALING GROUP -- > CREATE
+ --> NAME: SWIGGY
+  --> CREATE A LAUNCH TEMPLATE
+  --> NAME: SWIGGY-TEMPLATE
+  --> NOTE: GIVE THE CONFIGURATION JUST LIKE WE GIVE FOR EC2.
+
+i) Script:
+#! /bin/bash
+ sudo -i
+ apt update
+ apt install nginx  -y
+ cd /var/www/html/
+ git clone https://github.com/Ironhack-Archive/online-clone-amazon.git
+ mv online-clone-amazon/* .
+
+ ii) CREATE TEMPLATE
+ --> AZ AND SUBNETS: US-EAST-1A, US-EAST-1B, US-EAST-1C
+  --> LOAD BALANCING: ATTACH TO A NEW LOAD BALANCER
+  --> SELECT CREATE A NEW TARGET GROUP
+  --> NEXT
+  --> DESIRED : 2 -- > HOW MANY SERVERS YOU WANT NOW
+  --> MIN: 2 -- > ALWAYS ATLEAST I WANT 2 SERVERS
+  --> MAX: 10 -- > IF LOAD IS INCREASE I WANT 10 SERVERS
+  --> AUTOMATIC SCALING POLICY:
+  --> TARGET TRACKING SCALING POLICY:
+  --> CPU -- > VALUE: 50 -- > NEXT
+  --> NOTIFICATION -- > CREATE A TOPIC -- > NAME: SWIGGY SERVERS -- > EMAIL:
+  --> give your email -- > NEXT -- > NEXT -- > CREATE AUTO SCALING GROUP
+
+
+NOTIFICATION -- > CREATE A TOPIC -- > NAME: SWIGGY SERVERS -- > EMAIL: give your email -- > NEXT -- > NEXT -- > CREATE AUTO SCALING GROUP
+ 
+
+iii) how to increase load:
+
+  --> LOGIN TO SERVER:
+  --> apt update -y
+  --> apt install stress -y
+  --> stress -c4
+
+
+NOTE: TO DELETE SERVERS WE NEED TO DELETE ASG.
+ --> if you remove servers directly because of auto scaling group servers are going to recreate.
+
+
+Q1. WHY WE NEED ASG ?
+A: IF THE LOAD IS CHANGING FREQUENTLY WE CAN USE ASG.
+
+Q2. TYPES OF ASG ?
+A.  1. HORIZONTAL SCALING : WE CREATE NEW SERVERS 
+    2. VERTICAL SCALING   : FOR EXISTING SERVERS WE CAN INCREASE CPU & RAM
+
+Q3. HOW ASG IS GOING TO SCALE SERVERS ?
+A. TRACKING POLICY: USED TO SCALE THE SERVERS
+1. CPU 
+2. NETWORK IN
+3. NETWORK OUT
+4. COUNT PER TARGET
+
+Q4. HOW WILL ALL THE SERVERS IN ASG WILL GET SAME CONFIG ?
+A. TEMPLATE
+
+Q5. WHAT IS COOLING PERIOD ?
+A. AMOUNT OF TIME TAKEN BY SERVER BEFORE DELETE WHEN LOAD IS DECREASED 
+
+Q6. IF YOU DELETE A SERVER WILL ASG CREATE NEW SERVER ?
+A. YES
+
+Q7. WHAT IS WARMUP PERIOD ?
+A. AMOUNT OF TIME TAKEN BY SERVER BEFORE LANUCHING IN ASG.
+
+Q8. HOW WILL ASG KNOWS ABOUT CPU PERCENTAGE OF SERVER ?
+A. USING CLOUD WATCH
+
+=================10-09-2025==== Session 13=======================>
+
+
+24) cloud watch:
+-----------------------
+
+-> CLOUD INFRA: COMBINATION OF HARDWARE & SOFTWARE 
+-> RESOURCES USED TO RUN APP ON CLOUD.
+-> EX: EC2, ELB, ASG, S3, VPC -----------
+
+-> CLOUD WATCH: TO MONITOR THE CLOUD RESOURCE
+-> NOTE:BY DEFAULT MONITORING FOR EC2 IS ENABLED
+
+SERVER 		: APP
+AMI		: COPY OF SERVER
+ELB		: DISTRIBUTE LOAD BLW SERVERS
+ASG		: CREATE SERVERS AUTOMATICALLY
+CLOUD WATCH	: TO GET METRICS OF CLOUD RESOURCES
+
+-> METRICS MEANS INFORMATION ABOUT SERVER.
+     METRIC		: CPU, RAM, DISK -------
+
+i) TYPES OF DASHBOARDS:
+1. CUSTOM : USERS WILL CREATE
+2. AUTOMATIC: AWS WILL CREATE THE AUTOMATICALLY
+
+
+STEP-1: CREATE EC2 AND DEPLOY THE APPLICATION
+
+CREATE A SERVER AND RUN THE SCRIPT
+SCRIPT:
+#! /bin/bash
+sudo -i
+apt update
+apt install nginx  -y
+git clone https://github.com/karishma1521success/swiggy-clone.git
+mv swiggy-clone/* /var/www/html/
+
+
+
+STEP-2: CREAT A DASHBOARD
+-> CLOUD WATCH:
+-> CREATE DASHBOARD
+-> NAME: DASHBOARD1
+-> WIDGET: LINE
+-> EC2
+-> EC2: PER INSTANCE METRICS
+-> GIVE ID OF YOUR SERVER
+-> SELECT CPUUTILIZATION
+-> CREATE WIDGET
+
+TO GET MORE LOAD:
+-> sudo -i
+-> apt update
+-> apt install stress -y
+-> stress -c 4
+
+iii) EPEL: EXTRA PACKAGES FOR ENTERPRISE LINUX
+
+-> GO TO DASHBOARD AND CLICK ON SHARE THE DASHBOARD
+-> GENERATE A LINK AND COPY PASTE
+
+
+
+iv) HOW TO CREATE ALARM:
+-> CLOUD WATCH 
+-> ALL ALARM
+-> CREATE ALARM
+-> SELECT METRIC
+-> EC2
+-> EC2: PER INSTANCE METRICS
+-> CPUUtilization
+-> 60 -- > NEXT
+-> CREATE A SNS TOPIC -- > new topic -- > email
+-> EC2 ACTION:STOP
+
+
+
+=================11-09-2025==== Session 14=======================>
+
+25) IAM (Identity Access Management):
+----------------------------------------------------
+--> IAM IS used to Provide permission and Restriction To the User in Aws.
+
+1) IAM USER
+2) IAM Group
+3) IAM Policies
+4) IAM Role
+
+
+--> Authentication : Permission to login
+--> Authorization: Permission to work.
+--> Policies: set of permission (total 7)
+
+
+--> IN REAL TIME WE DONT USE ROOT USER FOR ROUTINE WORKS
+-->WE USE AWS IAM USER IN REAL TIME. (FOR DAILY WORKS)
+
+
+1) IAM USER: 
+
+---> IAM -- > USERS -- > CREATE USER -- > NAME: ABC -- > Provide user access to the AWS Management Console -- > I want to create an IAM user -- > Next -- > Attach policies directly -- > AmazonReadOnlyAccess -- > 
+
+ADDING NEW PERMISSION:-
+--> IAM -- > USER -- > PERMISSION --> ADD PERMISSION 
+
+2) IAM GROUP:
+--> USED TO GIVE PERMISSION FOR MULTIPLE USERS.
+--> A SINGLE USER CAN BE PART OF MAX 10 GROUPS.
+--> GROUP CANNOT BE NESTED.
+--> IF USER HAVE PERMISSION ON GROUP LEVEL AND USER LEVEL BOTH OF THE APPLIES.
+
+create few users without permissions
+--> IAM -- > USER GROUPS -- > NAME: DEVOPS -- > SELECT USERS -- > Attach policies directly -- > CREATE
+
+--> IF U FROGOT USERNANE &PASSWORD:
+--> SELECT USER -- > SECURITY CREDNTIALS -- > MANAGE CONSOLE ACCESS
+
+
+3) IAM ROLES:
+--> ROLES ARE USED BY SERVICES.
+--> ROLE IS SIMLAR TO IAM USER.
+--> ROLES ALSO HAVING PERMISSION LIKE USERS.
+--> ROLE DOESNT HAVE ANY CREDS.
+--> WE CAN SET TIME LIMIT FOR ROLES.
+--> IF TWO SERVICES WANT TO COMMUNICATE OR WORK TOGETHER WE USE ROLES.
+      EX: EC2 -- > S3
+
+http://54.242.59.171/
+
+--> ROLE -- > CREATE ROLE -- > AWS SERVICE -- > EC2 -- > PERMISSIONS: S3 FULL ACCESS -- > NAME: S3 ROLE -- > CREATE
+
+ATTACH ROLE TO SRVER:
+--> SELECT SERVER -- > ACTIONS -- > SECURITY -- > MODIFY IAM ROLE -- > S3 ROLE -- > UPDATE
+
+--> DEPLOY THE APP FROM SCRIPT 
+--> GO TO SERVER
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+apt install unzip -y
+unzip awscliv2.zip
+sudo ./aws/install
+
+
+command: aws s3 ls -- > execute this on server
+aws s3 cp /var/log/ngix/access.log s3:bucketname
+
+--> REVOKE SESSION: TO REMOVE THE EXISTING PERMISSION OF A ROLE.
+
+--> INLINE POLICY: CREATING CUSTOM POLICY FOR RESOURCES
+
+--> USER -- > ADD PERMISSION -- > CREATE INLINE POLICY -- > SERVICE: S3 -- > All S3 actions (s3:*) -- > bucket: BUCKETNAME -- > next
+
+
+Q1. DIFF BLW AUTHENTICATION VS AUTHORIZATION ?
+A.    AUTHENTICATION : PERMISSION TO LOGIN
+        AUTHORIZATION  : PERMISSION TO WORK
+
+Q2. HOW TWO services COMMUNICATE WITH EACH OTHER ?
+A     USING ROLES
+
+Q3. CAN WE CREATE NESTED GROUPS IN AWS ?
+A     NO
+
+Q4. HOW MANY GROPUPS CAN A SINGLE USER CAN BE PART OF ?
+A.  10
+
+Q5. DIFF BLW IAM USER & ROLES >
+A   USER WILL HAVE CREDS, ROLES WILL NOT HAVE
+    USER WONT HAVE TIME LIMIT BY DEFAULT, ROLES WILL HAVE
+    USER: USER -- SERVICE  ROLE: SERVICE -- SERVICE
+
+Q6. CAN WE ATTACH MULTIPPLE ROLES TO USER ?
+A    YES
+
+Q7. HOW DO YOU RESTRICT A SPECIFIC PERMISSION TO USER ?
+A. PERMISSION BOUNDARY
+
+Q8. BY DEFAULT FOR A USER HOW MANY KEYS WE CAN CREATE ?
+A. 2
+
+Q9. IF YOU LOST YOUR KEYS WHAT YOU ARE GOING TO DO ?
+A. DEACTIVE THE KEYS
+
+Q10. I HAVE A SPECIAL BUCKET WHERE MY CUSTOMRE NEED TO ACCESS FILES HOW DO YOU PROVIDE PERMISSION TO THAT CUSTOMER ?
+A. INLINE POLICY
+
+Q11. WHAT IS THE POLICY FORMAT ?
+A. JSON(JAVA SCRIPT OBJECT NOTATION)
+
+
+=================12-09-2025==== Session 15=======================>
+
+26) CLI (command line interface):
+------------------------------------
+
+--> maneging any aws service by CLI.
+
+--> USER -- > KEYS (PERMISSIONS) -- > SERVER
+--> ACCESS KEY & SECRET ACCESS KEY = USED TO ASSIGN PERMISSION TO SERVER
+--> BY DEFAULT WE CAN CREATE ONLY 2 KEYS.
+
+--> WHAT WILL YOU DO WHEN YOU LOST THE KEYS?
+      ANS: DEACTIVATE THE KEYS
+
+--> NOTE: PLS DONT DELETE THEM WITHOUT DEACTIVATE
+
+FLOW: USER -- > KEYS -- > ATTACH TO SERVER -- > SERVER
+
+CREATE A USER WTH ADMIN ACCESS
+
+CREATE A USER -- > SECURITY CREDENTIALS -- > CREATE ACCESS KEY -- > 
+Command Line Interface (CLI)-- > create 
+
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+aws configure -- > Run this command on server 
+
+AWS Access Key ID [None]: *********************** [pls put your own keys :(]
+AWS Secret Access Key [None]: ************************
+Default region name [None]: ap-east-1
+Default output format [None]: table
+
+
+CLI -- > COMMAND LINE INTERFACE
+WHY TO USE: TO OPERATE/CONTROL AWS SERVICES THROUGH COMMANDS
+
+aws s3 ls 			: to list the buckets
+aws s3 ls s3://bucketname	: to list files inside the bucket	
+aws s3 mb s3://newbucket	: to create a bucket
+aws s3 rb s3://newbucket	: to delete a bucket
+aws s3 cp file s3://bucket	: to copy file1 to bucket
+aws s3 cp copy-s3-uri .		: to copy files from bucket to server
+aws s3 sync s3://bucket1 s3://bucket2	: to copy all files from one bucket to another.
+
+mkidr raham
+touch raham/touch file{1..10}
+aws s3 cp folder s3://bucket --recursive : to copy folder to bucket
+
+IAM:
+aws iam list-users		: TO LIST IAM USERS
+aws iam list-groups		: TO LIST IAM GROUPS
+aws iam list-roles		: TO LIST IAM ROLES
+
+aws iam create-group --group-name devops
+aws iam create-user --user-name rahamabc
+aws iam create-role --role-name demorole
+
+aws iam delete-group --group-name devops
+aws iam delete-user --user-name rahamabc
+aws iam delete-role --role-name demorole
+
+EC2:
+
+aws ec2 run-instances --image-id ami-05fcfb9614772f051 --instance-type t2.micro --count 1 
+aws ec2 describe-instances   : to show complete info of all the servers
+aws ec2 stop-instances --instance-ids i-054a200a4effc917c
+aws ec2 start-instances --instance-ids i-054a200a4effc917c
+aws ec2 terminate-instances --instance-ids i-054a200a4effc917c
+
+
+
+CUSTOM PASSWORD POLICY:
+IAM -- > Account Settings -- > Password policy -- > Edit -- > save
+
+USER CREDS REPORT:
+The credentials report lists all your IAM users in this account and the status of their various credentials. After a report is created, it is stored for up to four hours.
+
+IAM
+Credential Report
+
+PERMISSION BOUNDARY: TO RESTRICT A USER TO NOT USE A SPECIFIC SERVICE.
+
+=================13-09-2025==== Session 16=======================>
+27) EFS:
+----------
+
+EFS: ELASTIC FILE SYSTEM
+--> PURPOSE: TO SHARE DATA BLW TWO SERVERS
+--> SIZE: GROW UP TO PETABYTES
+--> TYPE: SERVER LESS
+--> PROTOCOLS: NFSV4.0 & NFSV4.1
+
+--> INTEGRATIONS: EC2, ECS, EKS, Lambda, Fargate.
+--> MODES: 1. GENERAL PURPOSE 2. ELASTIC
+--> PRICING: 5 GB/YEAR FREE
+--> BACKUP: WE CAN GET BACKUPS
+
+
+
+NOTE: IF NFS IS NOT ENABLE ON SG YOU CANT GET THE DATA.
+
+EC2 -- > SECURITY GROUP -- > NAME -- > DESCRIPTION -- > SSH,NFS,HTTPD -- >
+PUT ANYWHERE -- > SAVE
+
+PRACTICAL PART:
+STEP-1: CREATE EFS
+
+
+
+EFS -- > CUSTOMIZE -- > NAME: REGIONAL  -- > REGIONAL -- > ELASTIC -- > GIVE SG WITH NFS ENABLE -- > NEXT -- > CREATE.
+
+
+STEP-2: CREATE 2 SERVERS ON US-EAST-1 & US-EAST-1B
+
+
+STEP-3: INSTALL APACHE AND GIT ON BOTH SERVERS
+
+yum install httpd git -y
+systemctl start httpd
+
+
+STEP-4: ATTACH EFS TO BOTH SERVERS 
+
+GO TO EFS -- > SELECT EFS -- > ATTACH -- > COPY PASTE COMMANDS ON BOTH SERVERS
+
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-029cbfcc1807809c1.efs.us-east-1.amazonaws.com:/  /var/www/html/
+
+
+STEP-5: UPLOAD THE CODE ON US-EAST-1A
+git clone https://github.com/Ironhack-Archive/online-clone-amazon.git
+mv online-clone-amazon/* /var/www/html
+
+
+NOTE: 
+WE CANT INTEGRATE EFS DIRECTLY TO ASG
+CEATE A SERVER -- > CREATE AMI -- > ASG
+
+=================15-09-2025==== Session 17=======================>
+
+FIRST EVER DOMAIN NAME : https://symbolics.com/ -- > 1985
+
+
+NAME RESOLUTION : PROCESS OF CONVERTING  IP TO DOMAIN (1.2.3.4 = WWW.SWIGGY.COM)
+DNS: DOMAIN NAME SYSTEM : 53
+
+27) ROUTE 53:
+--------------------
+
+
+DNS: DOMAIN NAME SYSTEM 
+PORT: 53
+PURPOSE: CONVERTING IP TO DOMAIN (192.168.1.0 = www.swiggy.com)
+DOMAIN PROVIDERS: GODADDY, BIGROCK, HOSTINGER, AWS, --------
+
+TYPES OF RECORDS:
+A	: IPV4
+AAAA	: IPV6
+CNAME	: HOSTNAME --> HOSTNAME
+MX	: MAIL SERVER
+
+
+#! /bin/bash
+sudo -i
+apt update
+apt install nginx  -y
+cd /var/www/html/
+git clone https://github.com/Ironhack-Archive/online-clone-amazon.git
+mv online-clone-amazon/* .
+
+
+NAME SERVER: IT TELLS BROWSER TO  CONNECT EXACT SERVER WHERE YOUR APP RUNS 
+EX: GUIDE FOR A TOUR
+
+
+PRACTICAL PART:
+STEP-1: BUY A DOMAIN FROM DOMAIN FROM BELOW SITES (GODADDY,HOSTINGER, BIG ROCK)
+STEP-2: CREATE A SERVER IN AWS AND LAUNCH AMAZON APP
+STEP-3: GO TO ROUTE 53 -- > HOSTED ZONES -- > CREATE -- > GIVE DOMAIN -- > PUBLIC -- > CREATE
+STEP-4: UPDATE NAME SERVER VALUES IN DOMAIN REGISTRAR (BIG ROC * : : K)
+STEP-5: CREATE RECORD -- > GIVE IP -- > SAVE
+
+
+NOW LETS CONVERT LOAD BALANCER DNS TO OUR OWN DNS
+CREATE ONE MORE SERVER AND ATTACH BOTH SERVERS TO LOAD BALANCER
+
+
+STEP-6: SELECT RECORD -- > EDIT --> ALIAS --> SELECT APP LB -- > REGION -- > SELECT LB -- > 
+
+Routing policy
+--> Simple (DEFAULT)
+--> Weighted
+--> Latency
+--> GeoLocation
+--> Multi vlue
+--> IP based
+--> FailOver
+
+
+=====================================================16-09-2025==== Session 18=======================>
+
+28) CDN:-
+29) cloud trail
+
+--> In AWS, a Content Delivery Network (CDN), such as Amazon CloudFront, is used to speed up the delivery of static and dynamic content (like websites, videos, applications, and APIs) to users globally. It achieves this by caching content on a network of servers in edge locations worldwide, which are geographically closer to users. This reduces latency, improves performance, and enhances security
+
+--> TTL:- TTL stand for "Time to take" application exam: 1st time it take time to load application but second time it does not take time. 1st time request go to server second time it does not goes to server i go to server. we can give time 5 min, 10 min, 1 day, 2 day.
+
+CDN: CONTENT DELIVERY NETWORK
+USED TO DELIVER APP FROM EDGE LOCATION
+IT GIVES FAST RESPONSE 
+EX: CRICKET MATCHES, E-COMMERCE SALES, ------
+
+WE NEED TO CREATE ORIGIN
+ORIGIN: FROM WHERE YOU ORIGINAL APPLICATION IS COMMING
+
+EXAMPLE OF ORIGINS: S3, ELB, API GATEWAY
+
+Origin Shield
+Its an additional caching layer that can help reduce the load on your origin and help protect its availability.
+
+ADVANTAGES:
+1. REDUCE LATENCY
+2. CUT COST
+3. CUSTOMIZE DELIVERY
+4. SECURITY
+
+FREE TIER:
+1 TB of data transfer out
+10,000,000 HTTP or HTTPS requests
+2,000,000 CloudFront Function invocations
+Each month, always free
+
+
+NOTE: FROM LB WE NEED TO ACCESS APP FROM HTTP NOT HTTPS
+
+STEP-1: CREATE 2 SERVERS AND DEPLOY AMAZON APP
+STEP-2: CREATE A LOAD BALANCER
+SETP-3: CLOUD FRONT -- > NAME -- > SINGLE APP -- > NEXT -- > ORIGIN DOMAIN: ELB (SELECT YOUR LB) -- > Customize -- > Protocol: HTTP only (ORIGIN PROTOCOL)
+-- > Enable Origin Shield: US-EAST-1  -- > Protocol: HTTPS(CLOUD FRONT PROTOCOL) -- > SELECT WAF -- > IPv6: OFF -- > CREATE
+
+NOTE: IT WILL TAKE 2 MINS TO ACTIVATE 
+
+HOW TO BLOCK USERS FROM DIFF LOCATIONS:
+SECURITY -- > CloudFront geographic restrictions
+
+MORE DATA: OPEN WAF
+
+
+
+CLOUD TRAIL: IT WILL SHOW SERVICES ACCESSED BY USER
+BY DEFAULT IT STORES LAST 90 DAYS OF ACTIVITIES.
+$2.00 per 1,00,000 management events delivered.
+$0.10 per 100,000 network activity events delivered
+
+BY DEFAULT CLOUD TRAIL WILL RECORD ALL EVENTS
+BUT I WANT ON SPECIFI EVENTS (S3, EC2) WE NEED TO CREATE CLOUD TRAIL 
+
+Trail name: my-users-events
+Log file SSE-KMS encryption: Disable
+NEXT
+Events: Management & Data
+Resource: s3
+Create trail
+
+Q1. HOW DO YOU TRACK USERATVITIES IN AWS ?
+A:  CLOUD TRAIL
+
+Q2. ONE OF THE USER DELETED ON SERVER IN AWS ACCOUNT HOW DO YOU FIND THEM ?
+A:  CLOUD TRAIL
+
+Q3. BY DEFAULT HOW MANY DAYS EVENTS SHOULD BE STORED ?
+A: 90 DAYS
+
+Q4. CAN WE FILER EVENTS SEPERATELY FOR A RESOURCE ?
+A: YES 
+
+
+======================================================17-09-2025==== Session 19=======================>
+
+
+MODIFIYING VOLUME:
+SELECT SERVER -- > CLICK ON STORAGE -- > SELECT VOLUME -- > ACTIONS -- > MODIFY
+
+ADDING ANOTHER VOLUME
+CREATE A VOLUME
+VOLUME -- > CREATE -- > SIZE: ABC -- > AZ: SELECT AS YOUR SERVER AZ -- > TAGS: Name = New server -- > CREATE
+
+ATTACHING VOLUME TO SERVER:
+SELECT VOLUME -- > ACTIONS -- > ATTACH -- > SELECT YOUR SERVER -- > /dev/xvdb -- > save
+
+BOOT/ROOT VOL : WHICH HAS OS
+NON-ROOT/DATA VOL: WHICH WILL NOT HAVE OS
+
+
+SERVER MIGRATION:
+
+1. CREATE A SERVER ON US-EAST-1A AND DEPLOY APP
+USE MY AMAZON SCRIPT
+
+2. TAKE A SNAPSHOT OF SERVER
+SELECT SERVER -- > STORAGE -- > VOLUME -- > ACTIONS -- > CREATE SNAPSHOT -- > CREATE
+
+3. COPYING THE SNAPSHOT:
+SELECT SNAPSHOT -- > ACTIONS -- > COPY SNAPSHOT -- > DESTINATION: AP-SOUTH-1 -- > COPY
+
+4. CREATE EBS FROM SNAPSHOT
+SELECT SNAPHSOT -- > ACTIONS -- > CREATE A VOLUME -- > AZ: US-EAST-2B -- > CREATE
+
+5. CREATE A SERVER ON AP-SOUTH-1 & DETACH EXISTING VOLUME
+CREATE A SERVER -- > SELECT -- > STOP 
+VOLUME -- > SELECT -- > ACTIONS -- > DETACH
+
+6. ATTACH THE VOLUME CREATED FROM SNAPSHOT
+VOLUME -- > ACTIONS -- > ATTACH -- > SELECT SERVER -- > DEVICENAME: FIRST OPTION -- > ATTACH
+
+
+Q1. HOW DATA WILL BE STORED ON EC2 ?
+A.  EBS
+
+Q2. HOW TO TAKE SERVER BACKUP ?
+A. SNAPSHOTS
+
+Q3. ARE SNAPSHOTS & EBS REGION AND AZ SPECIFIC ?
+A. YES
+
+Q4. MIN AND MAX SIZE OF EBS ?
+A.  8 GB - 16 TB
+
+Q5. CAN WE ATTACH MULTIPLE EBS TO SERVERS AT A TIME ?
+A.   YES
+
+Q6. HOW TO SAVE COST OF SNAPSHOTS ?
+A. ARCHIVE THEM (RECOVERY PERIOD IS 24 TO 72)
+
+Q7. CAN WE ATTACH SNAPSHOT TO EC2 DIRECTLTY ?
+A. NO
+
+Q8. TYPES OF VOLUMES IN EBS ?
+A.  SSD & HDD
+
+AMI VS SNAPSHOTS:
+
+FIRST TIME WE USE AMI TO LAUNCH SERVERS
+SNAPSHOTS WE USE TO TAKE BACKUP DAILY.
+
+1 -- > 10 files -- > ami
+10 -- > 100 files -- > snapshot
+
+
+aws ec2 create-snapshot --volume-id vol-1234567890abcdef0 
+
+======================================================18-09-2025==== Session 20=======================>
+
+RDS 
+DATABASE
+CREATE DATABASE
+STANDARD
+ENGINE: MYSQL
+TEMPLATE: 3 INSTANCES
+CREDS: AWS SECRET MANAGER
+INSTANCE CONFIG: DB.M5.2XLARGE
+CONNECT TO EC2: SELECT YOUR DB SERVER
+
+INSTALL MYSQL IN AMAMZON LINUX:
+sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm 
+sudo dnf install mysql80-community-release-el9-1.noarch.rpm -y
+sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+sudo dnf install mysql-community-client -y
+sudo dnf install mysql-community-server -y
+
+
+INSTALLING ON UBUNTU:
+sudo apt update
+sudo apt install mysql-server -y
+mysqld --version
+sudo systemctl status mysql
+
+
+AFTER CREATING DB TO GET THE CREDS
+
+VIEW CREDS 
+MANAGE CREDS
+SECERET VALUE
+REVEAL
+
+
+
+CONNECTION  TO DATABASE:
+DATABASE -- > CONNECTIVITY -- > END POINT 
+database-1-instance-1.us-east-1.rds.amazonaws.com
+
+
+NOW GO TO EC2 AND RUN BELOW COMMAND TO CONNECT
+mysql -u admin -h endpoint -p
+
+GETTING PASSWORD:
+DATABASE -- > CONFIGUARTION -- > Master credentials ARN -- > Manage in Secrets Manager 
+Retrieve secret value
+
+create database raham;
+show databases;
+use raham;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    password VARCHAR(20),
+    city VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (name, email, password, city) VALUES ('ramu', 'ramu@gmail.com', 'ramu123', 'rajavarm' );
+INSERT INTO users (name, email, password, city) VALUES ('remo', 'remo@gmail.com', 'remo143', 'vizag');
+INSERT INTO users (name, email, password, city) VALUES ('aparichith', 'aparichith@gmail.com', 'kumbipakam', 'hell');
+
+SELECT * FROM users;
+exit
+
+======================================================19-09-2025==== Session 21=======================>
+
+
+WALL		: VPC
+PUB-SUB		: HALL
+MAIN GATE	: IGW
+
+CIDR: CLASSLESS INTER DOMAIN ROUTING
+
+VPC 	= WALL
+
+STEP-1: CREATE VPC
+VPC -- > CREATE VPC -- > NAME: SWIGGY -- > CIDR: 10.0.0.0/16 -- > CREATE
+
+SUBNET = ROOM
+
+STEP-2: CREATE SUBNET [PUBLIC = HALL]
+SUBNET -- > CREATE -- > VPC: SWIGGY -- > NAME: WEB-SUBNET  -- > CIDR: 10.0.0.0/24 -- > CREATE
+
+STEP-3: CREATE A INTERNET GATEWAY [IGW = MAIN GATE]
+INTERNET GATEWAY -- > CREATE -- > NAME: SWIGGY-IGW -- > CREATE -- > ATTACH TO VPC -- > SWIGGY
+
+STEP-4: CREATE ROUTE TABLE
+ROUTE TABLE -- > NAME: SWIGGY-WEB-RTB -- > VPC: SWIGGY -- > CREATE
+EDI ROUTES -- > ADD -- > 0.0.0.0/0 -- > IGW : SWIGGY -- > ADD
+
+ASSOCIATE THE WEB SERVER TO THE ROUTE TABLE.
+SUBNET ASSOCIATION -- > SELECT WEBSUBNET -- > ASSOCIATE.
+
+CREATE  A WEB SERVER WITH SWIGGY VPC AND SWIGGY-WEB SUBNET.
+NOTE: SELECT EDIT OPTION IN NETWORK
+VPC	: SWIGGY
+SUBNET	: SWIGY-WEB-SUBNET
+
+NOTE: ENABLE AUTO ASSIGN PUBLIC IP FOR WEB SERVER WHILE CREATING.
+CREATE NEW SG 
+
+http://13.233.224.47/
+
+#! /bin/bash
+sudo -i
+apt update
+apt install git nginx  -y
+cd /var/www/html/
+git clone https://github.com/karishma1521success/swiggy-clone.git
+mv swiggy-clone/* .
+
+
+
+STEP-5: CREATE SUBNET (PRIVATE =APP = BED ROOM)
+SUBNET -- > CREATE -- > VPC: SWIGGY -- > NAME: APP-SUBNET  -- > CIDR: 10.0.1.0/24 -- > CREATE
+
+STEP-6: CREATE A NAT GATEWAY
+NAT GATEWAY -- > CREATE -- > NAME: SWIGGY-NAT -- > SUBNET: WEB SUBNET -- > Elastic IP allocation -- > CREATE
+
+STEP-7: CREATE ROUTE TABLE
+ROUTE TABLE -- > NAME: APP-RTB -- > VPC: SWIGGY -- > CREATE
+EDI ROUTES -- > ADD -- > 0.0.0.0/0 -- > NAT : SWIGGY -- > ADD
+ASSOCIATE THE APP SERVER TO THE ROUTE TABLE.
+SUBNET ASSOCIATION -- > SELECT APPSUBNET -- > ASSOCIATE.
+
+
+CREATE  A APP SERVER WITH SWIGGY VPC AND SWIGGY-APP SUBNET.
+NOTE: SELECT EDIT OPTION IN NETWORK
+VPC	: SWIGGY
+SUBNET	: SWIGY-APP-SUBNET
+
+NOTE: DISABLE AUTO ASSIGN PUBLIC IP FOR APP SERVER WHILE CREATING.
+CREATE NEW SG 
+
+NOW CONNECTING TO APP SERVER:
+
+OPEN WEB SERVER & sudo -i
+vim pemfile -- > copy & paste the pem file content -- > chmod 400 pemfile
+ssh "pemfile" ec2-user@public-ip 
+
+PEERING: ESTABLISHING CONNECTION BLW 2 VPCS
+
+TRANSIT GATEWAY:
+networking service that allows you to connect multiple VPCs, on-premises networks, and other AWS resources through a central hub. 
+
+VPC Endpoints: provide a secure and private connection between your VPC & AWS services, without requiring access over the public internet. 
+This is useful for scenarios where you want to avoid exposing sensitive data to the internet while enabling private communication between resources in your VPC and services like Amazon S3, DynamoDB, or other AWS services.
+
+
+
+======================================20-09-2025==== Session 22=================================================
+CFT: CLOUD FORMATION TEMPLATE
+WE CEATE RESOURCES THROUGH CODE
+CODE:YAML/JSON
+FEB 25 2011 
+IAC : INFRA AS A CODE
+
+
+YAML = YET ANOTHER MARKUP LANGUAGE
+JSON = JAVA SCRIPT OBJECT NOTATION
+
+
+NAME	: RAHAM
+LOC 	: HYD
+COMPANY	: NIT
+PRO	: TECHIE
+AGE	: *****
+
+ADVANTAGES:
+1. WRITE CODE FOR ONCE AND USE MULTIPLE TIMES
+2. WE CAN SAVE TIME
+3. WE CAN AVOID MANUAL WORK
+4. WE CAN LIMIT THE MISTAKES
+
+TEMPLATE: IT IS A FILE WHICH CONSIST OF RESOURCE INFROMATION.
+STACK: GROUP OF RESOURCE
+
+Specifying templates:
+1. S3
+2. LOCAL
+3. GITHUB
+4. BUILD COMPOSERS
+
+STEPS FOR PRACTICAL PART:
+1. SELECT CFT -- > Create Stack
+2. Build from Infrastructure Composer
+3. Drag and drop the ec2 resource and copy code from chatgpt
+4. validate -- > create template -- > next
+5. ROLE -- > CloudFormation -- > admin access -- > name -- > attach
+6. CREATE SNS TOPIC FOR SENDING EMAIL.
+
+PROMPT-1: SIMPLE PROMPT
+generate a cft code for aws vpc  
+
+PROMPT-2: HIGH LEVEL PROMPT
+as an experienced cloud engineer generate a powerful cft script to create vpc subnet igw and routetable in a simplified way that need to have very less code
+
+STATUS:
+CREATION
+DELETION
+UPDATION
+ROLLBACK: IF ONE RESOURCE IN STACK GOT FAILED, IT WILL DELETE ALL RESOURCES.
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-020cba7c55df1f615
+      InstanceType: t2.micro
+      KeyName: Rkeypair
+      SecurityGroups:
+        - all
+      Tags:
+        - Key: Name
+          Value: raham
+
+
+
+CHANGE SET: it is created when we want to modify the existing resource configuration.
+changeset
+create changeset.
+
+Edit in Infrastructure Composer
+template
+t2.medium=t2.large
+validate
+create changeset
+next
+next
+next
+submit
+select changeset - > execute
+
+
+VPC CODE:
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Minimal VPC setup with subnet, IGW, and route table
+
+Resources:
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.10.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags: [{ Key: Name, Value: MyMinimalVPC }]
+
+  Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.10.1.0/24
+      MapPublicIpOnLaunch: true
+      Tags: [{ Key: Name, Value: PublicSubnet }]
+
+  IGW:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags: [{ Key: Name, Value: IGW }]
+
+  AttachIGW:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref IGW
+
+  RouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags: [{ Key: Name, Value: PublicRouteTable }]
+
+  DefaultRoute:
+    Type: AWS::EC2::Route
+    DependsOn: AttachIGW
+    Properties:
+      RouteTableId: !Ref RouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref IGW
+
+  SubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref Subnet
+      RouteTableId: !Ref RouteTable
+
+Outputs:
+  VPCId:
+    Value: !Ref VPC
+  SubnetId:
+    Value: !Ref Subnet
+  InternetGatewayId:
+    Value: !Ref IGW
+
+
+ASSIGNMENT-1:
+ALL OF THE BELOW ACTIONS YOU NEED TO DO IN IAM USER
+
+
+1. CREATE A VPC WITH 2 PUBLIC SUBNETS AND 2 PRIVATE SUBNETS, ROUTE TABLES, NAT, IGW ---
+
+
+2. CREATE 2 SERVERS ON PUBLIC SUBNETS AND LAUCH AMAZON APP
+3. ATTACH A LOAD BALANCER TO THAT SERVER
+4. CREATE A CLOUD FRONT FOR LOAD BALANCER
+5. STORE THE LOGS IN AWS S3 BUCKETS (/var/log/httpd/access_log)
+6. S3 BUCKET MUST CREATE BY USING CLI COMMAND & LOGS ALSO COPIED BY CLI COMMAND
+7. CREATE A CLOUD WATCH DASHBOARD FOR WEB SERVERS
+8. CREATE SNAPSHOT AND AMI FOR THE SERVERS
+
+
+
+
+OPTINAL : TRY TO CREATE EVERYTHING USING CFT
+
+

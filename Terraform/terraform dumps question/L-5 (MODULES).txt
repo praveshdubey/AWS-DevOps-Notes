@@ -1,0 +1,227 @@
+1. When you add a new module to a configuration, Terraform must download it before it can be used. What two commands can be used to download and update modules? (select two)
+
+terraform init
+terraform get
+
+2. CAN WE REFER VALUES TO MAIN BLOCK ?
+ANS: YES
+
+3. From where the module is coming from ?
+
+module "iam" {
+  source  = "terraform-aws-modules/iam/aws"
+  version = "5.46.0"
+}
+
+ANS: the Terraform public registry
+
+4. What do the declarations, such as name, cidr, and azs, in the following Terraform code represent and what purpose do they serve
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+ 
+  name = var.vpc_name
+  cidr = var.vpc_cidr
+}
+
+ANS: these are variables that are passed into the child module likely used for resource creation
+
+5. What are some of the requirements that must be met in order to publish a module on the Terraform Public Registry? 
+ANS:
+The module must be on GitHub and must be a public repo.
+Release tag names must be for the format x.y.z, and can optionally be prefixed with a v .
+Module repositories must use this three-part name format, terraform-<PROVIDER>-<NAME>.
+
+
+6. A Terraform module (usually the root module of a configuration) can call other modules to include their resources into the configuration. A module that has been called by another module is often referred to as _______________.
+
+called module
+parent module
+sourced module
+child module : True
+
+7 . From Belwo snippet below. Where will Terraform download the referenced module from?
+
+
+terraform {
+  required_providers {
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.6.1"
+    }
+  }
+}
+ 
+provider "kubernetes" {
+  # Configuration below
+...
+
+the official Terraform public registry : TRUE
+from the hashicorp/kubernetes directory where Terraform is executed
+from the configured VCS provider in the hashicorp/kubernetes repo
+
+8.  where is the module that the code is referencing?
+
+module "server_subnet_1" {
+  source          = "./modules/web_server"
+  ami             = data.aws_ami.ubuntu.id
+  key_name        = aws_key_pair.generated.key_name
+  user            = "ubuntu"
+}
+
+
+Ans: in the modules subdirectory in the current working directory where Terraform is being executed
+
+9. You've included two different modules from the official Terraform registry in a new configuration file. When you run a terraform init, where does Terraform OSS download and store the modules locally?
+
+ANS: in the .terraform/modules folder in the working directory
+
+10. A child module created a new subnet for some new workloads. What Terraform block type would allow you to pass the subnet ID back to the parent module?
+
+terraform block
+resource block
+output block : true
+data block
+
+11. True or False? When referencing a module, you must specify the version of the module in the calling module block.
+ans: False
+
+12. Can the child modules refer to any of the variables declared in the parent module?
+ANS: Not the variable, but it can only refer to values that are passed to the child module
+
+13. You have a module named prod_subnet that outputs the subnet_id of the subnet created by the module. How would you reference the subnet ID when using it for an input of another module?
+
+ANS: subnet = module.prod_subnet.subnet_id
+
+14. a single module can be called many times in a single configuration file
+ANS: True
+
+15. True or False? Official Terraform providers and modules are owned and maintained by HashiCorp.
+Ans: True
+
+16. You have declared a variable named db_connection_string inside of the app module. However, when you run a terraform apply, you get the following error message:
+
+Error: Reference to undeclared input variable
+ 
+on main.tf line 35:
+4: db_path = var.db_connection_string
+ 
+An input variable with the name "db_connection_string" has not been declared. This variable can be declared with a variable "db_connection_string" {} block.
+
+ANS:
+since the variable was declared within the module, it cannot be referenced outside of the module
+
+17. From  the snippet below. Where is this particular module stored?
+
+
+
+module "consul" {
+  source = "hashicorp/consul/aws"
+  version = "0.1.0"
+}
+
+ANS: 
+locally in the hashicorp/consul/aws directory
+a private registry supported by your organization
+public Terraform registry: TRUE
+locally but a directory back from the current directory
+
+18. Where is the module below stored?
+
+
+
+module "monitoring_tools" {
+  source = "./modules/monitoring_tools"
+ 
+  cluster_hostname = module.k8s_cluster.hostname
+}
+
+ANS:
+on the Terraform public registry
+in a public GitLab repository
+a private registry in Terraform Cloud (free)
+locally on the instance running Terraform: True
+
+19. Which of the following are the benefits of using modules in Terraform? (select three)
+
+ans:
+Allows modules to be stored anywhere accessible by Terraform : False
+enables code reuse: True
+supports versioning to maintain compatibility: True
+supports modules stored locally or remotely: True
+
+20. Given the following snippet of code, what does servers = 4 reference?
+
+module "servers" {
+  source = "./modules/aws-servers"
+ 
+  servers = 4
+}
+
+ANS: the value of an input variable
+
+
+21. Raham is calling a child module to deploy infrastructure for her organization. he specifies the module version he wants to use even though there are newer versions available. During a terrafom init, Terraform downloads v0.0.5 just as expected.
+
+What would happen if Margaret removed the version parameter in the module block and ran a terraform init again?
+
+Ans: Terraform would use the existing module already downloaded
+
+
+22. Raham is using a module to deploy some EC2 instances on AWS for a new project. He is viewing the code that is calling the module for deployment, which is shown below. Where is the value of the security group originating?
+
+module "ec2_instances" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "4.3.0"
+ 
+  name           = "my-ec2-cluster"
+  instance_count = 2
+ 
+  ami                    = "ami-0c5204531f799e0c6"
+  instance_type          = "t2.micro"
+  vpc_security_group_ids = [module.vpc.default_security_group_id]
+  subnet_id              = module.vpc.public_subnets[0]
+ 
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+
+ANS: the output of another module
+
+
+
+23. By default, a child module will have access to all variables set in the calling (parent) module.
+ANS: False
+
+24. Which of the following statements are true about this code? (select two)
+
+module "servers" {
+  source = "./app-cluster"
+ 
+  servers = 5
+}
+
+ans: 
+
+app-cluster is the child module : True
+main.tf is the child module
+main.tf is the calling module : True
+app-cluster is the calling module
+
+25. Published modules via the Terraform Registry provide which of the following benefits? (select four)
+
+
+allow browsing version histories: True
+automatically generated documentation: True
+show examples and READMEs: True
+support versioning: True
+support from any code repo: False
+
+26. You found a module on the Terraform Registry that will provision the resources you need. What information can you find on the Terraform Registry to help you quickly use this module?
+
+ANS:
+Required Input Variables
+A list of Outputs
+Dependencies to use the Module
+

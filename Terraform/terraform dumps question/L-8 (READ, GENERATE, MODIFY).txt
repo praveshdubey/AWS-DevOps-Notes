@@ -1,0 +1,495 @@
+1. As you are developing new Terraform code, you are finding that you are constantly repeating the same expression over and over throughout your code, and you are worried about the effort that will be needed if this expression needs to be changed. What feature of Terraform can you use to avoid repetition and make your code easier to maintain?
+
+ANS: Locals 
+
+2. Given the following code snippet, what is the managed resource name for this particular resource?
+
+
+
+resource "aws_vpc" "prod-vpc" {
+  cidr_block = var.vpc_cidr
+ 
+  tags = {
+    Name        = var.vpc_name
+    Environment = "demo_environment"
+    Terraform   = "true"
+  }
+ 
+  enable_dns_hostnames = true
+}
+
+ANS: prod-vpc
+
+
+3. Which of the following are collection or structural types that can be used when declaring a variable in order to group values together? (select four)
+
+tuple	: true
+list	: true
+object	: true
+map     : true
+string
+bool
+number
+
+4. How should you reference this variable throughout your configuration?
+
+
+variable "aws_region" {
+  default     = "us-east-1"
+}
+
+ans: var.aws_region
+
+5 . True or False? min, max, format, join, trim, and length are examples of different expressions in Terraform.
+
+ANS: FALSE
+
+6. When using collection types for variables in Terraform, which of the following two statements are true? (select two)
+
+maps are defined inside of curly braces, like this: { name = "John" age = 52 } : TRUE
+
+lists are defined inside of square brackets, like this: ["value1", "value2", "value3"] : TRUE
+
+maps are defined inside of square brackets, like this: [ name = "John" age = 52 ]
+
+lists are defined inside of curly braces, like this: {"value1", "value2", "value3"}
+
+7. True or False? Terraform can only manage dependencies between resources if the depends_on argument is explicitly set for the dependent resources.
+
+ANS: False
+
+8. Given the code snippet below, how would you refer to the value of ip  of an environment when using a for_each argument in a resource block?
+
+
+
+variable "env" {
+  type = map(any)
+  default = {
+    prod = {
+      ip = "10.0.150.0/24"
+      az = "us-east-1a"
+    }
+    dev  = {
+      ip = "10.0.250.0/24"
+      az = "us-east-1e"
+    }
+  }
+}
+
+ANS: var.env["dev.ip"]
+
+9. What Terraform command can be used to evaluate and experiment with expressions in your configuration?
+
+ANS: terraform console
+
+10. True or False? If you have properly locked down access to your state file, it is safe to provide sensitive values inside of your Terraform configuration.
+
+ANS: FALSE
+
+11. 
+A new variable has been created using the list type as shown below. How would you reference terraform in your configuration.
+
+variable "products" {
+    type = list(string)
+    default = [
+        "vault",
+        "consul",
+        "terraform",
+        "boundary",
+        "nomad"
+    ]
+}
+
+ANS: var.products[2]
+
+12. You have an existing resource in your public cloud that was deployed manually, but you want the ability to reference different attributes of that resource throughout your configuration without hardcoding any values. How can you accomplish this?
+
+ANS: Add a data block to your configuration to query the existing resource. Use the available exported attributes of that resource type as needed throughout your configuration to get the values you need.
+
+
+13. variables marked as sensitive are still stored in the state file, even though the values are obfuscated from the CLI output
+
+ANS: TRUE
+
+14. the default value will be found in the state file if no other value was set for the variable
+
+ANS: TRUE
+
+15. True or False? The terraform graph command can be used to generate a visual representation of a configuration or execution plan.
+
+ANS: TRUE
+
+16. Which of the following is the best description of a dynamic block?
+
+ANS: 
+produces nested configuration blocks instead of a complex typed value : TRUE
+
+declares a resource of a given type with a given local name
+
+requests that Terraform read from a given data source and export the result under the given local name
+
+exports a value exported by a module or configuration
+
+17. You are using modules to deploy various resources in your environment. You want to provide a "friendly name" for the DNS of a new web server so you can simply click the CLI output and access the new website. Which of the following code snippets would satisfy these requirements?
+
+ANSL:
+
+Add the following code to the parent module:
+
+
+
+output "website" {
+  description = "Outputs the URL of the provisioned website" 
+  value       = "https://${module.web.public_dns}:8080/index.html"
+}
+
+18. Variables and their default values are typically declared in a main.tf or variables.tf file. What type of file can be used to set explicit values for the current working directory that will override the default variable values?
+
+ANS: .tfvars file
+
+19. Which block type is used to assign a name to an expression that can be used multiple times within a module without having to repeat it?
+
+ANS: LOCALS 
+
+20. Given a Terraform config that includes the following code, how would you reference the last instance that will be created?
+
+
+
+resource "aws_instance" "database" {
+  # ...
+  for_each = {
+    "vault": "secrets",
+    "terraform": "infrastructure",
+    "consul": "networking",
+    "nomad": "scheduler"
+  }
+}
+
+ANS: aws_instance.database["nomad"]
+
+21. Based on the following code, which code block will create a resource first?
+
+
+
+resource "aws_instance" "data_processing" {
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = "t2.micro"
+ 
+  depends_on = [aws_s3_bucket.customer_data]
+}
+ 
+module "example_sqs_queue" {
+  source  = "terraform-aws-modules/sqs/aws"
+  version = "2.1.0"
+ 
+  depends_on = [aws_s3_bucket.customer_data, aws_instance.data_processing]
+}
+ 
+resource "aws_s3_bucket" "customer_data" {
+  acl = "private"
+}
+ 
+resource "aws_eip" "ip" {
+  vpc      = true
+  instance = aws_instance.data_processing.id
+}
+
+ANS: aws_s3_bucket.customer_data
+
+
+23. can data block enables Terraform to fetch data for use elsewhere in the Terraform configuration
+
+ANS: TRUE
+
+24. Based on the code provided, how many subnets will be created in the AWS account?
+
+variables.tf
+
+variable "private_subnet_names" {
+  type    = list(string)
+  default = ["private_subnet_a", "private_subnet_b", "private_subnet_c"]
+}
+variable "vpc_cidr" {
+  type    = string
+  default = "10.0.0.0/16"
+}
+variable "public_subnet_names" {
+  type    = list(string)
+  default = ["public_subnet_1", "public_subnet_2"]
+}
+main.tf
+
+resource "aws_subnet" "private_subnet" {
+  count             = length(var.private_subnet_names)
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index)
+  availability_zone = data.aws_availability_zones.available.names[count.index]
+ 
+  tags = {
+    Name      = var.private_subnet_names[count.index]
+    Terraform = "true"
+  }
+}
+
+ANS: 3
+
+24. When a terraform apply is executed, where is the AWS provider retrieving credentials to create cloud resources in the code snippet below?
+
+
+
+provider "aws" {
+   region     = us-east-1
+   access_key = data.vault_aws_access_credentials.creds.access_key
+   secret_key = data.vault_aws_access_credentials.creds.secret_key
+}
+ANS: from a data source that is retrieving credentials from HashiCorp Vault. Vault is dynamically generating the credentials on Terraform's behalf.
+
+25. Terraform language has built-in syntax for creating lists. Which of the following is the correct syntax to create a list in Terraform?
+
+ANS:
+
+<"string1", "string2", "string3">
+
+("string1", "string2", "string3")
+
+["string1", "string2", "string3"]  : TRUE
+
+{"string1", "string2", "string3"}
+
+26. Select the feature below that best completes the sentence:
+
+The following list represents the different types of __________ available in Terraform.
+
+max
+min
+join
+replace
+length
+range
+
+ANS: FUNCTIONS
+
+27. When using modules to deploy infrastructure, how would you export a value from one module to import into another module?
+
+For example, a module dynamically deploys an application instance or virtual machine, and you need the IP address in another module to configure a related DNS record in order to reach the newly deployed application.
+
+ANS: configure an output value in the application module in order to use that value for the DNS module
+
+28. What is the downside to using Terraform to interact with sensitive data, such as reading secrets from Vault?
+
+ANS: secrets are persisted to the state file
+
+
+29. When configuring a remote backend in Terraform, it might be a good idea to purposely omit some of the required arguments to ensure secrets and other relevant data are not inadvertently shared with others. What alternatives are available to provide the remaining values to Terraform to initialize and communicate with the remote backend? (select three)
+
+ANS: 
+directly querying HashiCorp Vault for the secrets
+
+command-line key/value pairs   : TRUE
+
+interactively on the command line  : TRUE
+
+use the -backend-config=PATH flag to specify a separate config file  : TRUE
+
+30. Given the Terraform configuration below, which order will the resources be created?
+
+resource "aws_instance" "web_server" {
+    ami = "i-abdce12345"
+    instance_type = "t2.micro"
+}
+ 
+resource "aws_eip" "web_server_ip" { 
+    vpc = true 
+    instance = aws_instance.web_server.id 
+}
+
+ANS: 
+aws_instance will be created first
+aws_eip will be created second
+
+31. In the example below, where is the value of the DNS record's IP address originating from?
+
+resource "aws_route53_record" "www" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = "www.helloworld.com"
+  type    = "A"
+  ttl     = "300"
+  records = [module.web_server.instance_ip_addr]
+}
+
+ANS: the output of a module named web_server
+
+32. What is the best and easiest way for Terraform to read and write secrets from HashiCorp Vault?
+
+ANS: Vault provider
+
+
+33. You have been given requirements to create a security group for a new application. Since your organization standardizes on Terraform, you want to add this new security group with the fewest number of lines of code. What feature could you use to iterate over a list of required tcp ports to add to the new security group?
+
+ANS: DYNAMIC BLOCK
+
+34. What Terraform feature is shown in the example below?
+
+ resource "aws_security_group" "example" {
+  name = "sg-app-web-01"
+ 
+  dynamic "ingress" {
+    for_each = var.service_ports
+    content {
+      from_port = ingress.value
+      to_port   = ingress.value
+      protocol  = "tcp"
+    }
+  }
+}
+
+ANS: DYNAMIC BLOCK
+
+35. Which of the following variable declarations is going to result in an error?
+
+ANS: 
+
+variable "example" { 
+  description = "This is a variable description" 
+  type        = list(string) 
+  default     = {}
+}
+
+NOTE: WITHPUT VALUE IT WILL GIVEV ERROR
+
+36. What environment variable can be set to enable detailed logging for Terraform?
+
+ANS: TF_LOG
+
+37. You are developing a new Terraform module to demonstrate features of the most popular HashiCorp products. You need to spin up an AWS instance for each tool, so you create the resource block as shown below using the for_each meta-argument.
+
+
+
+resource "aws_instance" "bryan-demo" {
+  # ...
+  for_each = {
+    "terraform": "infrastructure",
+    "vault":     "security",
+    "consul":    "connectivity",
+    "nomad":     "scheduler",
+  }
+}
+After the deployment, you view the state using the terraform state list command. What resource address would be displayed for the instance related to vault?
+
+ANS: aws_instance.bryan-demo["vault"]
+
+38. What Terraform command will launch an interactive console to evaluate and experiment with expressions?
+
+ANS: terraform console
+
+39. From the code below, identify the implicit dependency:
+
+
+
+resource "aws_eip" "public_ip" {
+    vpc      = true
+    instance = aws_instance.web_server.id
+}
+ 
+resource "aws_instance" "web_server" {
+  ami           = "ami-2757f631"
+  instance_type = "t2.micro"
+  depends_on    = [aws_s3_bucket.company_data]
+}
+
+ANS: The EC2 instance labeled web_server
+
+
+40. In the example below, the depends_on argument creates what type of dependency?
+
+
+
+resource "aws_instance" "example" {
+  ami           = "ami-2757f631"
+  instance_type = "t2.micro"
+  depends_on    = [aws_s3_bucket.company_data]
+}
+
+ANS: explicit dependency
+
+
+41. You are adding a new variable to your configuration. Which of the following is NOT a valid variable type in Terraform?
+
+float : TRUE
+number
+map
+bool
+string
+
+42. Question 30
+Correct
+True or False? The following code is an example of an implicit dependency in Terraform
+
+
+
+resource "aws_instance" "web" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+}
+ 
+resource "aws_ebs_volume" "data" {
+  availability_zone = "us-west-2a"
+  size              = 1
+ 
+  tags = {
+    Name = "data-volume"
+  }
+}
+ 
+resource "aws_volume_attachment" "attach_data_volume" {
+  device_name = "/dev/xvdf"
+  volume_id   = aws_ebs_volume.data.id
+  instance_id = aws_instance.web.id
+}
+
+ANS: True
+
+43. True or False? When using the Terraform provider for Vault, the tight integration between these HashiCorp tools provides the ability to mask secrets in the state file.
+
+ANS: FALSE
+
+44. In Terraform, most resource dependencies are handled automatically. Which of the following statements best describes how Terraform resource dependencies are handled? 
+
+ANS: 
+Terraform analyzes any expressions within a resource block to find references to other objects and treats those references as implicit ordering requirements when creating, updating, or destroying resources.
+
+45. In the following code snippet, the type of Terraform block is identified by which string?
+
+resource "aws_instance" "db" {
+  ami           = "ami-123456"
+  instance_type = "t2.micro"
+}
+
+ANS: RESOURCE
+
+46. Understanding how indexes work is essential when working with different variable types and resource blocks that use count or for_each. Therefore, what is the output value of the following code snippet?
+
+
+
+variable "candy_list" {
+  type = list(string)
+  default = ["snickers", "kitkat", "reeces", "m&ms"]
+}
+ 
+output "give_me_candy" {
+  value = element(var.candy_list, 2)
+}
+
+
+ANS:
+
+reeces : TRUE
+kitkat
+snickers
+
+47. Which of the following is a valid variable name in Terraform?
+
+ANS: 
+Lifecycle
+Count
+invalid : TRUE

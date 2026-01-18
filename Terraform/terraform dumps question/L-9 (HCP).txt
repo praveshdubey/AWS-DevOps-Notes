@@ -1,0 +1,135 @@
+1. True or False? You can use a combination of Terraform Cloud's cost estimation feature and Sentinel policies to ensure your organization doesn't apply changes to your environment that would result in exceeding your monthly operating budget.
+
+ANS: TRUE 
+
+2. True or False? In Terraform OSS, workspaces generally use the same code repository while workspaces in Terraform Enterprise/Cloud are often mapped to different code repositories.
+
+ANS: TRUE
+
+3. Given the definition below, what Terraform feature is being described?
+
+"helps you share Terraform providers and Terraform modules across your organization. It includes support for versioning, a searchable list of available providers and modules, and a configuration designer to help you build new workspaces faster."
+
+ANS: 
+Private Registry: TRUE
+Terraform Workspaces
+HashiCorp Sentinel
+CDK for Terraform
+
+4. You want to restrict your team members to specific modules that are approved by the organization's security team when using Terraform Cloud. What feature should you use?
+
+ANS: Terraform Cloud Private Registry
+
+5. Which statement below is true regarding using Sentinel in Terraform Enterprise?
+
+ANS:
+
+Sentinel can extend the functionality of user permissions in Terraform Enterprise
+
+Sentinel runs before each phase of the Terraform workflow, meaning a terraform init, terraform plan, and terraform apply
+
+Sentinel policies can be developed using HCL, JSON, or YAML
+
+Sentinel runs before a configuration is applied, therefore potentially reducing cost for public cloud resources : TRUE
+
+6. True or False? You can continue using your local Terraform CLI to execute terraform plan and terraform apply operations while using Terraform Cloud as the backend.
+
+ANS: TRUE
+
+7. Which of the following Terraform offerings provides the ability to use a private registry?
+
+ANS:
+
+Terraform OSS/CLI
+Terraform Cloud : TRUE
+
+8. True or False? When using Terraform Cloud, committing code to your version control system (VCS) can automatically trigger a speculative plan.
+
+ANS: TRUE
+
+9. True or False? In both Terraform OSS and Terraform Cloud, workspaces provide similar functionality of using a separate state file for each workspace.
+
+ANS: TRUE
+
+10. You are using Terraform Cloud to manage a new data analytics environment for your organization. You have decided to use Sentinel to enforce standardization and security controls. At what step are the Sentinel policies enforced during a run?
+
+ANS: after the plan, run tasks, cost estimation phases but before the apply phase
+
+
+11. Terraform Cloud provides organizations with many features not available to those running Terraform open-source to deploy infrastructure. Select the ADDITIONAL features that organizations can take advantage of by moving to Terraform Cloud. (select three)
+
+ANS:
+
+remote runs		: TRUE
+private registry	: TRUE
+Terraform registry
+providers
+VCS connection		: TRUE
+
+12. What is the primary function of Terraform Cloud agents?
+ANS: execute Terraform plans and apply changes to infrastructure
+
+13. Which feature of Terraform Cloud can be used to enforce fine-grained policies to enforce standardization and cost controls before resources are provisioned with Terraform?
+ANS: sentinel
+
+14. When using Terraform Cloud, what is the easiest way to ensure the security and integrity of modules when used by multiple teams across different projects?
+ANS: Use the TFC Private Registry to ensure only approved modules are consumed by your organization
+
+15. Your organization requires that no security group in your public cloud environment includes "0.0.0.0/0" as a source of network traffic. How can you proactively enforce this control and prevent Terraform configurations from being executed if they contain this specific string?
+
+ANS: Create a Sentinel or OPA policy that checks for the string and denies the Terraform apply if the string exists
+
+16. Each CLI workspace coincides with a different VCS repo
+
+ANS: FALSE
+
+17. AutoPlants, Inc is a new startup that uses AI and robotics to grow sustainable and organic vegetables for California farmer's markets. The organization can quickly burst into the public cloud during the busy season using Terraform to provision additional resources to process AI computations and images. Since its compute stack is proprietary and critical to the organization, it needs a solution to create and publish Terraform modules that only its engineers and architects can use.
+
+Which feature can provide this functionality?
+
+ANS: Private Registry
+
+18. When using variables in Terraform Cloud, what level of scope can the variable be applied to? (select three)
+
+A specific Terraform run in a single workspace
+
+All workspaces across multiple Terraform Cloud organizations : FALSE
+
+All current and future workspaces in a project using a variable set
+
+Multiple workspaces using a variable set
+
+19. In Terraform Cloud, a workspace can be mapped to how many VCS repos?
+
+ANS: 1
+
+20. True or False? Similar to Terraform OSS, you must use the CLI to switch between workspaces when using Terraform Cloud workspaces.
+
+ANS: FALSE
+
+21. Terraform Cloud can be managed from the CLI but requires __________?
+
+ANS: API TOKEN
+
+22. Terraform Cloud is more powerful when you integrate it with your version control system (VCS) provider. Select all the supported VCS providers from the answers below. (select four)
+
+ANS: 
+
+Bitbucket Cloud
+Azure DevOps Server
+GitHub.com
+GitHub Enterprise
+CVS Version Control  : FALSE
+
+23. Can sentinel To allow users to bypass version control and directly apply changes to production
+
+ANS: FALSE
+
+24. What feature of Terraform Cloud allows you to publish and maintain a set of custom modules that can only be used within your organization?
+
+ANS: PRIVATE REGISTRY
+
+25. After many years of using Terraform Community (Free), you decide to migrate to Terraform Cloud. After the initial configuration, you create a workspace and migrate your existing state and configuration. What Terraform version would the new workspace be configured to use after the migration?
+
+ANS: the same Terraform version that was used to perform the migration
+

@@ -1,0 +1,71 @@
+1. BENIFITS OF TERRAFORM:
+IaC uses a human-readable configuration language to help you write infrastructure code quickly
+IaC code can be used to manage infrastructure on multiple cloud platforms
+IaC allows you to commit your configurations to version control to safely collaborate on infrastructure
+Iac allows a user to turn a manual task into a simple, automated deployment
+Iac is relatively simple to learn and write, regardless of a user's prior experience with developing code
+Iac provides configuration consistency and standardization among deployments.
+Iac gives the user the ability to recreate an application's infrastructure for disaster recovery scenarios
+Terraform simplifies management and orchestration, helping operators build large-scale, multi-cloud infrastructure
+Terraform can manage cross-cloud dependencies
+Terraform can help businesses deploy applications on multiple clouds and on-premises infrastructure
+Provide reusable modules for easy sharing and collaboration
+Easily change and update existing infrastructure
+Easily integrate with application workflows (GitHub Actions, Azure DevOps, CI/CD tools)
+Safely test modifications using a "dry run" before applying any actual changes
+allows infrastructure to be versioned 
+code can easily be shared and reused  
+creates a blueprint of your data center
+the reduction of misconfigurations that could lead to security vulnerabilities and unplanned downtime
+the ability to programmatically deploy infrastructure
+standardize your deployment workflow
+API-driven workflows
+enables self-service for developers and operators alike
+
+
+2. Can Iac replaces development languages such as Go and .Net for application development
+ANS: FALSE
+
+3. Can Terraform Provide a codified workflow to develop customer-facing applications
+ANS: FALSE
+
+4. What are some problems with how infrastructure was traditionally managed before Infrastructure as Code?
+
+Traditional deployment methods are not able to meet the demands of the modern business where resources tend to live days to weeks, 
+rather than months to years
+Traditionally managed infrastructure can't keep up with cyclic or elastic applications.
+Requests for infrastructure or hardware often required a ticket, increasing the time required to deploy applications.
+
+5. Infrastructure as Code (IaC) makes infrastructure changes _______, ________, ________, and __________. (select four)
+
+idempotent : YES
+repeatable : YES
+consistent : YES
+predictable: YES
+highly-available: (NO)
+
+
+6. Terraform is an immutable, declarative, Infrastructure as Code provisioning language based on Hashicorp Configuration Language, or optionally JSON.
+
+7. Terraform can always be used to deploy the latest features and services ?
+ANS: FALSE
+
+8. Terraform can always eliminates parallelism ?
+ANS: FALSE
+
+9. Terraform is designed to work only with public cloud platforms, and organizations that wish to use it for on-premises infrastructure (private cloud) should look for an alternative solution.
+ANS: FALSE
+
+10. Can Terraform reducing vulnerabilities in your publicly-facing applications ?
+ANS: FALSE
+
+11. Infrastructure as code (IaC) tools allow you to manage infrastructure with configuration files rather than through a graphical user interface.
+ANS: TRUE 
+
+12. Iac provides many benefits to help organizations deploy application infrastructure much faster than manually clicking in the console. Which is NOT an additional benefit to IaC?
+
+ANS: eliminates API communication to the target platform
+
+13. A new employee has developed changes to existing code and wants to push it into production. What best practice should the new employee follow to submit the new code?
+ANS: Submit a merge/pull request of the proposed changes. Have a team member validate the changes and approve the request.
+

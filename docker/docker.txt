@@ -1,0 +1,998 @@
+================================DOCKER=======Session 58 - 10th Nov===================================================
+
+
+1) APPLICATION: Collection of services 
+-> MONOLITHIC: multiple services are deployed on single server with single database.
+-> MICRO SERVICES: multiple services are deployed on multiple servers with multiple database.
+
+Note: BASED ON USERS AND APP COMPLEXITY WE NEED TO SELECT THE ARCHITECTURE.
+
+2) FACTORS AFFECTING FOR USING MICROSERVICES:
+-> F-1: COST 
+-> F-2: MAINTAINANCE
+-> F-3: TIME
+
+
+3) CONTAINERS:
+-> Containers are standardized, lightweight, executable software packages that bundle an application's code, libraries, dependencies, and settings.
+-> its free of cost and can create multiple containers.
+-> its same as a server/vm. OR we can say it's mini version of server.
+-> it will not have any operating system.
+-> os will be on images.
+	(SERVER=AMI, CONTAINER=IMAGE)
+
+Note: CONTAINER TOOLS: DOCKER, CONTAINERD, ROCKET, CRI-O, PODMAN, KATA CONTAINER ----
+
+4) DOCKER:-
+-> Its an free & opensource tool.
+-> it is platform independent.
+-> used to create, run & deploy applications on containers.
+-> it is introduced on 2013 by solomenhykes & sebastian phal.
+-> We used GO language to develop the docker.
+-> here we write files on YAML.
+-> Docker will use host resources (cpu, mem, n/w, os).
+-> Docker can run on any OS but it natively supports Linux distributions.
+-> before docker user faced lot of problems, but after docker there is no issues with the application.
+
+5) CONTAINERIZATION/DOCKERIZATION:
+-> Process of packing an application with its dependencies.
+	ex: PUBG
+-> Problem statement of use case of DOCKERIZATION
+	-> APP= PUBG & DEPENDECY = MAPS
+	-> APP= CAKE & DEPENDECY = KNIFE
+
+6) VIRTUALIZATION:
+-> able to create resource with our hardware properties.
+-> Os level of virtualization.
+
+7) ARCHITECTURE & COMPONENTS:
+-> client:-
+	-> it will interact with user
+	-> user gives commands and it will be executed by docker client
+-> daemon:-
+	-> manages the docker components(images, containers, volumes)
+-> host:-
+	-> where we install docker (ex: linux, windows, macos)
+-> Registry:-
+	-> manages the images.
+	-> INSIDE THE IMAGE WE HAVE OS TO RUN THE CONTAINER.
+-> Docker image:-
+	-> Docker images are lightweight, standalone, read-only templates containing everything needed to run an application (code, runtime, libraries, settings).
+
+8) Hou to install and start the docker 
+-> Note: In ubuntu it start automatically but in amazon Linux we need to start
+-> yum install docker -y    #client
+-> systemctl start docker         #client,Engine
+-> systemctl status docker
+
+9) COMMANDS:
+    Note: without update we cant install any pkg in ubuntu
+    - apt update -y         					: to update 
+    - redhat=yum							: to update in redhat
+    - ubuntu=apt							: to update in ubuntu
+    -> to install git and apache
+		 -> apt install git -y
+		 -> apt install apache2 -
+
+    -> docker pull ubuntu        			  	: pull ubuntu image
+    -> docker images               				: to see list of images
+    -> docker run -it --name cont1 ubuntu  : to create a container
+    -> -it (interactive) -					: to go inside a container
+    -> cat /etc/os-release       			        : to see os flavour
+
+    -> ctrl d               						: to exit container and then container will stop
+    -> ctrl p q								: to exit container and but container will not stop
+    -> docker ps -a                				: to list all containers
+    -> docker attach cont_name        		: to go inside container
+    -> docker stop cont_name        			: to stop container
+    -> docker start cont_name       			: to start container
+    -> docker pause cont_name        		: to pause container
+    -> docker unpause cont_name			: to unpause container
+    -> docker inspect cont_name			: to get complete info of a container
+    -> docker rm cont_name        			: to delete a container
+    -> different between STOP and KILL
+	- STOP: will wait to finish all process running inside container
+	- KILL: wont wait to finish all process running inside container
+
+=============================Session 59 - 11th Nov============================================
+
+10) OS LEVEL OF VIRTUALIZATION:
+    -> ability to take backup of complete os and reuse it.
+    -> docker pull ubuntu
+    -> docker run -it --name cont1 ubuntu
+    -> apt update -y
+    -> apt install mysql-server apache2 python3 -y
+    -> touch file{1...5}
+    -> apache2 -v
+    -> mysql-server --version
+    -> python3 --version
+    -> ls
+
+=> COMMANDS:-
+  -> docker commit cont1 raham:v1
+  -> docker run -it --name cont2 raham:v1
+  -> apache2 -v
+  -> mysql-server --version
+  -> python3 --version
+  -> ls
+
+  -> docker kill $(docker ps -qa)
+  -> docker rm $(docker ps -qa)
+  -> docker rmi -f $(docker images -qa)
+
+11) DOCKERFILE:-
+  -> it is an automation way to create image.
+  -> here we use components to create image.
+  -> in Dockerfile D must be Capiatl.
+  -> Components also capital.
+  -> To write our instructions we need to use components in Dockerfile
+  -> This Dockerfile will be Reuseable.
+  -> here we can create image directly without container help.
+  -> Name: Dockerfile
+
+12) COMPONENTS:-
+  -> FROM                : used to base image
+  -> RUN                   : used to run linux commands (During image creation)
+  -> CMD                  : used to run linux commands (After container creation)
+  -> ENTRYPOINT  : high priority than cmd
+  -> COPY                 : to copy local files to container
+  -> ADD                   : to copy internet files to container
+  -> WORKDIR        : to open req directory
+  -> ENV                   : to set env variables (inside container)
+  -> ARGS                 : to pass env variables (outside containers)
+  -> LABEL                : to add labels for docker images
+  -> EXPOSE             : to indicate port number
+  -> VOLUME
+  -> NETWORK
+
+13) ENTRYPOINT VS CMD:
+  -> FROM ubuntu
+  -> ENTRYPOINT ["sleep"]
+  -> CMD ["1000"]
+
+EX-1:-
+Step 1:-
+  -> FROM ubuntu
+  -> RUN  apt update
+  -> RUN apt install apache2 -y
+  -> RUN apt install python3 -y
+  -> CMD apt install mysql-server -y
+Step 2:-
+  -> docker build -t raham:v1 .
+  -> docker run -it --name cont1 raham:v1 
+
+EX-2:
+Step 1:-
+  -> FROM ubuntu
+  -> COPY index.html /tmp
+  -> ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.102/bin/apache-tomcat-9.0.102.tar.gz /tmp
+Step 2:-
+  -> docker build -t raham:v2 .
+  -> docker run -it --name cont2 raham:v2
+
+EX-3:
+Step 1:-
+  -> FROM ubuntu
+  -> COPY index.html /tmp
+  -> ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.107/bin/apache-tomcat-9.0.107.tar.gz /tmp
+  -> WORKDIR /tmp
+  -> ENV user raham
+  -> ENV client swiggy
+Step 2:-
+  -> docker build -t raham:v3 .
+  -> docker run -it --name cont3 raham:v3
+
+EX-4:
+Step 1:-
+  -> FROM ubuntu
+  -> LABEL author raham
+  -> EXPOSE 8080
+Step 2:-
+  -> docker build -t raham:v4 .
+  -> docker run -it --name cont4 raham:v4
+  -> ctrl p q
+  -> docker inspect cont4
+
+INDEX.HTML LINK: https://www.w3schools.com/howto/tryit.asp?
+filename=tryhow_css_form_icon
+
+EX-5:
+NETFLIX-DEPLOYMENT:
+
+  -> apt install git -y
+  -> git clone https://github.com/RAHAMSHAIK007/netflix-clone.git
+  -> cd netflix-clone/
+
+     Vi Dockerfile
+
+
+  -> FROM ubuntu
+  -> RUN apt update
+  -> RUN apt install apache2 -y
+  -> COPY * /var/www/html/
+  -> CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+
+ -> docker build -t netflix:v1 .
+ -> docker run -it --name netflix1 -p 81:80 netflix:v1
+
+
+14) MULTI-STAGE BUILD:
+-> With multi-stage builds, you use multiple FROM statements in your Dockerfile
+-> if we build image-1 from docker file and use that image-1 to build other image.
+
+Advantage:-
+-> less time
+-> less work
+-> less size
+-> less complexity
+
+
+
+=================================Session 60 - 12th Nov==================================================
+
+Excercise:-
+
+vim Dockerfile
+
+-> FROM ubuntu
+-> RUN apt update -y
+-> RUN apt install apache2 -y
+-> COPY index.html /var/www/html
+-> CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+
+-> Index.html: take form w3 schools 
+-> https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_form_icon        
+
+-> docker build -t movies:v1 .
+-> docker run -itd --name movies -p 81:80 movies:v1
+
+-> docker build -t train:v1 .
+-> docker run -itd --name train -p 82:80 train:v1
+
+-> docker build -t dth:v1 .
+-> docker run -itd --name dth -p 83:80 dth:v1
+
+-> docker build -t recharge:v1 .
+-> docker run -itd --name recharge -p 84:80 recharge:v1
+
+-> docker ps -a -q                : to list container ids
+-> docker kill $(docker ps -a -q) : to kill all containers 
+-> docker rm $(docker ps -a -q) : to remove all containers 
+
+-> Note: In the above process all the containers are managed and created one by one in real time we manage all the containers at same time so for that purpose we are going to use the concept called Docker compose.
+
+
+15) DOCKER COMPOSE:-
+-> It's a tool used to manage multiple containers in single host.
+-> we can create, start, stop, and delete all containers together.
+-> we write container information in a file called a compose file.
+-> compose file is in YAML format.
+-> inside the compose file we can give images, ports, and volumes info of containers.
+-> we need to download this tool and use it.
+
+=> INSTALLATION:-
+	-> curl -SL https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+	-> chmod +x /usr/local/bin/docker-compose
+	-> sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+	-> docker-compose version
+
+Note:-
+	-> In Linux majorly you are having two type of commands first one is inbuilt commands which come with the operating system by default 
+	-> second one is download commands we are going to download with the help of yum, apt or Amazon Linux extras.
+	-> some commands we can download on binary files.
+
+
+Note:- 
+	-> linux will not give some commands, so to use them we need to download seperately
+	-> once a command is downloaded we need to move it to /usr/local/bin
+	-> because all the user-executed commands in linux will store in /usr/local/bin
+	-> executable permission need to execute the command
+
+=>Example:-
+-> vim docker-compose.yml
+
+services:
+  movies:
+    image: movies:v1
+    ports:
+      - "81:80"
+  train:
+    image: train:v1
+    ports:
+      - "82:80"
+  dth:
+    image: dth:v1
+    ports:
+      - "83:80"
+  recharge:
+    image: recharge:v1
+    ports:
+      - "84:80"
+
+
+=>COMMANDS:
+-> docker-compose up -d                : to create and start all containers
+-> docker-compose stop                  : to stop all containers
+-> docker-compose start                  : to start all containers
+-> docker-compose kill                     : to kill all containers
+-> docker-compose rm                	    : to delete all containers
+-> docker-compose down                : to stop and delete all containers
+-> docker-compose pause                : to pause all containers
+-> docker-compose unpause           : to unpause all containers
+-> docker-compose ps -a                   : to list the containers managed by compose file
+-> docker-compose images               : to list the images managed by compose file
+-> docker-compose logs                    : to show logs of docker compose
+-> docker-compose top                     : to show the process of compose containers
+-> docker-compose restart              : to restart all the compose containers
+-> docker-compose scale train=10     : to scale the service
+
+
+=> How to change the default fine	
+	-> by default the docker-compose will support the following names
+		-> docker-compose.yml, docker-compose.yaml, compose.yml, compose.yaml
+	-> Command:-
+		-> mv docker-compose.yml raham.yml			: to change the file name use this
+		-> docker-compose up -d        : throws an error	: to test use this command (will give an error)
+
+-> docker-compose -f raham.yml up -d      # Start services
+-> docker-compose -f raham.yml ps      	   # Check status
+-> docker-compose -f raham.yml down    # Stop & remove services
+
+
+images we create on server.
+these images will work on only this server.
+	
+
+git (local) -- > github (internet) = to access by others
+image (local) -- > dockerhub (internet) = to access by others
+
+16) CREATE  A DOCKERHUB ACCOUNT:-
+	-> CLICK ON DOTS -- > DOCKER HUB -- > CREATE REPOSITORY
+         
+
+>>>Replace your username 
+
+STEPS:
+-> create dockerhub account
+-> create a repo
+
+-> docker tag movies:v1 vijaykumar444p/movies
+-> docker login -- > username and password
+-> docker push vijaykumar444p/movies
+
+-> docker login -- > username and password
+
+-> docker tag train:v1 vijaykumar444p/train
+-> docker push vijaykumar444p/train
+
+-> docker tag dth:v1 vijaykumar444p/dth
+-> docker push vijaykumar444p/dth
+
+-> docker tag recharge:v1 vijaykumar444p/recharge
+-> docker push vijaykumar444p/recharge
+
+-> docker rmi -f $(docker images -q)
+-> docker pull vijaykumar444p/movies:latest
+
+
+=> INSTALLING MULTIPLE TOOLS:-
+-> docker run -it --name jenkins -p 8080:8080 jenkins/jenkins:lts
+-> docker run -d --name prometheus-container -e TZ=UTC -p 9090:9090 ubuntu/prometheus:2-24.04_stable
+
+-> docker run -d --name=grafana -p 3000:3000 grafana/grafana
+
+=> DOCKER SAVE:
+-> docker image save swiggy:v1 > swiggy:v1.tar :covert image to file 
+-> docker image history swiggy:v1
+-> docker rmi swiggy:v1
+-> docker images
+-> docker image load < swiggy\:v1.tar
+
+-> COMMAND TO ZIP:  gzip dummy:v5.tar abc.zip
+-> DECOMPRESS COMMAND: gzip movies:latest.gz -d
+
+-> COMPRESSING DOCKER IMAGE SIZE:
+-> 1. push to dockerhub
+-> 2. use multi stage docker build
+-> 3. reduce layers
+-> 4. use tar balls
+
+===========================Session 61 - 13th Nov===============================================
+
+
+17) DOCKER VOLUMES:
+-> It is used to store data inside container.
+-> volume is a simple directory inside container.
+-> containers uses host resources (cpu, ram, rom).
+-> single volume can be shared to multiple containers.
+-> ex: cont-1 (vol1)  --- > cont2 (vol1) & cont3 (vol1) & cont4 (vol1)
+-> at a time we can share single volume to single container only.
+-> every volume will store under /var/lib/docker/volumes
+
+
+METHOD-1:
+DOCKER FILE:
+
+-> FROM ubuntu
+-> VOLUME ["/volume1"]
+
+-> docker build -t raham:v1 .
+-> docker run -it --name cont1 raham:v1
+-> cd volume1/
+-> touch file{1..5}
+-> cat>file1
+-> ctrl p q
+
+
+-> docker run -it --name cont2 --volumes-from cont1  ubuntu
+-> cd /volume1
+-> ll
+-> touch file{6..10}
+-> ctrl pq
+
+-> docker attach cont1
+-> cd volume1
+-> ll
+
+-> docker run -it --name cont3 --volumes-from cont1 ubuntu
+
+METHOD-2:
+-> FROM CLI:
+
+-> docker run -it --name cont4 -v volume2 ubuntu
+-> cd volume2/
+-> touch java{1..5}
+-> ctrl p q
+
+-> docker run -it --name cont5 --volumes-from cont4  ubuntu
+-> cd volume2
+-> ll
+-> touch java{6..10}
+-> ctrl p q
+-> docker attach cont4
+-> ls
+
+-> METHOD-3: VOLUME MOUNTING
+
+-> docker volume ls                 : to list volumes
+-> docker volume create name        : to create volume
+-> docker volume inspect volume3        : to get info of volume3
+-> cd /var/lib/docker/volumes/volume3/_data 
+-> touch python{1..5}
+-> docker run -it --name cont6 --mount source=volume3,destination=/abc ubuntu
+-> docker volume rm         : to delete volumes
+-> docker volume prune        : to delete unused volumes
+
+HOST -- > CONTAINER:
+
+-> cd /root
+-> touch raham{1..5}
+-> docker volume inspect volume4
+-> cp * /var/lib/docker/volumes/volume4/_data
+-> docker exec cont5 ls /volume4
+
+-> RESOURCE MANAGEMENT:
+-> By default, docker containers will not have any limits for the resources like cpu ram and memory so we need to restrict resource use for container.
+
+-> By default docker containers will use host resources(cpu, ram, rom)
+-> Resource limits of docker container should not exceed the docker host limits.
+
+-> docker stats  --> to check live cpu and memory
+
+-> docker run -it --name cont7 --cpus="0.1" --memory="300mb" ubuntu
+-> docker update cont7 --cpus="0.7" --memory="300mb"
+
+-> JENKINS SETUP BY DOCKER:
+-> docker run -it --name jenkins -p 8080:8080 jenkins/jenkins:lts
+
+-> PROMETHEUS SETUP BY DOCKER:
+-> docker run -it --name prometheus -p 9090:9090 bitnami/prometheus:latest
+
+-> GRAFANA SETUP BY DOCKER:
+-> docker run -it --name grafana -p 3000:3000 grafana/grafana
+
+18) TRIVY:
+-> ITS A TOOL USED TO SCAN IMAGES AND FILE SYSTEMS
+-> IT ENSURE OUR IMAGES ARE SAFE AND SECURE BEFORE WE USE THEM
+
+-> wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.tar.gz
+-> tar zxvf trivy_0.18.3_Linux-64bit.tar.gz
+-> sudo mv trivy /usr/local/bin/
+-> echo "export PATH=$PATH:/usr/local/bin/" >> .bashrc
+-> source .bashrc 
+
+COMMANDS:
+-> trivy image raham:v1
+-> trivy image ubuntu:latest
+-> docker pull ubuntu:22.04
+-> trivy image ubuntu:22.04
+-> docker pull nginx:1.19.6 #1.19.6 specifies the vulnerable version of the nginx image
+-> trivy image nginx:1.19.6
+-> trivy filesystem /
+
+=============================Session 62 - 14rth Nov====================================================
+
+19) High Availability: more than one server
+-> why: if one server got deleted then other server will gives the app
+
+DOCKER SWARM:
+-> its an orchestration tool for containers. 
+-> used to manage multiple containers on multiple servers.
+-> here we create a cluster (group of servers).
+-> in that cluster, we can create same container on multiple servers.
+-> here we have the manager node and worker node.
+-> manager node will create & distribute the container to worker nodes.
+-> worker node's main purpose is to maintain the container.
+-> without docker engine we cant create the cluster.
+-> Port: 2377
+-> worker node will join on cluster by using a token.
+-> manager node will give the token.
+
+-> docker swarm init
+-> docker swarm join --token SWMTKN-1-2hlbbmgpw65ciunzowk7692vigc7d74arft7xpg35a72fkn9lu-577e38366sinrwo9heo9pn0wn 172.31.83.232:2377
+
+SETUP:-
+-> create 3 servers
+-> install docker and start the service
+-> hostnamectl set-hostname manager/worker-1/worker-2
+-> Enable 2377 port 
+
+
+-> docker swarm init (manager) -- > copy-paste the token to worker nodes
+-> docker run -itd --name cont1 -p 81:80  vishalmunemanik111/movies:latest
+-> docker node ls
+
+-> Note: individual containers are not going to replicate.
+-> if we create a service then only containers will be distributed.
+
+
+-> SERVICE: it's a way of exposing and managing multiple containers.
+-> in service we can create copy of containers.
+-> that container copies will be distributed to all the nodes.
+
+-> service -- > containers -- > distributed to nodes
+
+-> http://13.217.219.207:81/
+-> http://34.231.70.118:81/
+-> http://44.197.204.206:81/
+
+-> docker service create --name movies --replicas 3 -p 81:80 vijaykumar444p/movies:latest
+-> docker service ls                			: to list services
+-> docker service inspect movies         : to get complete info of service
+-> docker service ps movies        		: to list the containers of movies
+-> docker service scale movies=10       : to scale in the containers
+-> docker service scale movies=3         : to scale out the containers
+-> docker service rollback movies        : to go previous state
+-> docker service logs movies                : to see the logs
+-> docker service rm movies                   : to delete the services.
+
+-> when scale in it follows lifo pattern.
+-> LIFO MEANS LAST-IN FIRST-OUT.
+
+-> Note: if we delete a container it will recreate automatically itself.
+-> it is called as self healing.
+
+20) CLUSTER ACTIVIES:
+-> docker swarm leave (worker)        		: to make node inactive from cluster
+-> To activate the node copy the token.
+-> docker node rm node-id (manager)	: to delete worker node which is on down state
+-> docker node inspect node_id        		: to get comple info of worker node
+-> docker swarm join-token manager        : to generate the token to join
+
+-> Note: we cant delete the node which is ready state
+-> if we want to join the node to cluster again we need to paste the token on worker node
+
+-> DOCKER NETWORKING:
+-> Docker networks are used to make communication between the multiple containers that are running on same or different docker hosts. 
+
+-> We have different types of docker networks.
+-> Bridge Network                	: SAME HOST
+-> Overlay network                	: DIFFERENT HOST
+-> Host Network
+-> None network
+
+-> BRIDGE NETWORK: 
+	-> It is a default network that container will communicate with each other within the same host.
+-> OVERLAY NETWORK: 
+	-> Used to communicate containers with each other across the multiple docker hosts.
+-> HOST NETWORK: 
+	-> When you Want your container IP and ec2 instance IP same then you use host network
+-> NONE NETWORK: 
+	-> When you don’t Want The container to get exposed to the world, we use none network. It will not provide any network to our container.
+
+-> To create a network: docker network create network_name
+-> To see the list: docker network ls
+-> To delete a network: docker network rm network_name
+-> To inspect: docker network inspect network_name
+-> To connect a container to the network: docker network connect network_name container_id/name
+-> docker exec -it cont1  /bin/bash
+-> apt update
+-> apt install iputils-ping -y : command to install ping checks
+-> ping ip-address of cont2
+-> crtl pq
+
+-> To disconnect from the container: docker network disconnect network_name container_name
+-> To prune: docker network prune
+
+21) PORTAINER:
+-> it is a container organizer, designed to make tasks easier, whether they are clustered or not. 
+-> abel to connect multiple clusters, access the containers, migrate stacks between clusters
+-> it is not a testing environment mainly used for production routines in large companies.
+-> Portainer consists of two elements, the Portainer Server and the Portainer Agent. 
+-> Both elements run as lightweight Docker containers on a Docker engine
+
+-> Must have swarm mode and all ports enable with docker engine
+-> curl -L https://downloads.portainer.io/ce2-16/portainer-agent-stack.yml -o portainer-agent-stack.yml
+-> docker stack deploy -c portainer-agent-stack.yml portainer
+->  docker ps
+-> public-ip of swamr master:9000
+
+22) DATABASE SETUP:
+-> docker run -itd --name dbcont -e MYSQL_ROOT_PASSWORD=raham123 mysql:9.0.1
+-> docker exec -it dbcont /bin/bash
+-> mysql -u root -p
+
+-> docker run -it --rm -p 8888:8080 tomcat:9.0
+
+
+=========================Session 63 - 17th Nov=====================================================
+
+
+ECS & ECR:
+
+
+ECS:
+
+
+Amazon Elastic Container Service (Amazon ECS) is a highly scalable and fast container management service. 
+Used to create, run, stop, and manage containers on a cluster. 
+ECS doesn’t have any server and compute power (CPU & Ram).
+Can be able to do roll back.
+With Amazon ECS, your containers are defined in a task definition that you use to run an individual task or task within a service.
+Deploy & load balance application across multiple servers.
+It will do auto scaling to handle the large traffic.
+You can run your tasks and services on a serverless infrastructure that's managed by AWS Fargate. 
+Alternatively, for more control over your infrastructure, you can run your tasks and services on a cluster of Amazon EC2 instances that you manage.
+
+
+
+
+DOCKER-COMPOSE VS ECS:
+When we use the docker-compose file to deploy it contains all the configuration of containers.
+For example if we have 3 servers we cannot deploy to all the containers at the same time, and if you do the same deployment on all three servers individually it cannot able to know all the 3 servers are manging the same application which is major disadvantage.
+Docker compose cannot able to do automatic load balancing and Auto scaling.
+Instead of using K8S, Swarm, Apahe Mesos and NoMad we can use ECS which is alternative for those
+Apache Mesos is the opposite of virtualization because in virtualization one physical resource is divided into multiple virtual resources, while in Mesos multiple physical resources are clubbed into a single virtual resource.
+
+
+
+
+ECS LAUNCH TYPES
+WORKING WITH EC2:
+Here we are going to manage the infrastructure ie instances.
+We need to install ECS agent to communicate.
+Need to set Firewall.
+We need to make sure all the patches is done for recent updates.
+Finally you can manage the containers and configure it as per your requirments.
+
+
+WORKING WITH FARGET:
+It follow serverless Architecture.
+We don’t have EC2 instances so need not maintain them.
+It will create servers on demand.
+We will pay for what we use here.
+
+
+
+
+ECS TASKS:
+A task definition is required to run Docker containers in Amazon ECS. Simply it is the blue print for containers and how it is deployed.  It will contain
+The Docker image to use with each container in your task for Application.
+How much CPU and memory to use with each task or each container within a task
+The infrastructure that your tasks are hosted on
+The Docker networking mode to use for the containers in your task
+The logging configuration to use for your tasks
+Whether the task continues to run if the container finishes or fails
+The command that the container runs when it's started
+Any data volumes that are used with the containers in the task
+The IAM role that your tasks use
+
+
+ECS SERVICES:
+A service definition defines how to run your Amazon ECS service.
+It will ensure that certain tasks are running at all times.
+It will restart the containers that is crashed or exited.
+For example if you have an application we want 2 instances/containers tp run our application all time, we say this to service then it will create 2 instances/containers and start running our application.
+If any instance fail it will restart the task.
+LOAD BALANCERS:
+The main intention is to distribute the traffic here.
+If we have app is deployed we can assign the LB and route the traffic to resources.
+If we scale our instance the LB is here able to drive the traffic to newly created instance.
+
+
+
+
+
+
+HOSTING AN APPLICATION ON ECS:
+UPLOADING IMAGE TO ECR:
+Amazon Elastic Container Registry (ECR) is a fully managed container registry.
+Easy to store, manage, share, and deploy your container images and artifacts anywhere.
+It supports private repositories with resource-based permissions using AWS IAM. 
+Specified users or EC2 instances can access your container repositories and images. 
+You can use your preferred CLI to push, pull, and manage Docker images, Open Container Initiative (OCI) images, and OCI compatible artifacts.
+
+
+
+
+STEPS: WORK ON MUMBAI REGION
+
+
+1. CREATE EC2 AND INSTALL GIT & DOCKER
+yum install git docker -y
+systemctl start docker
+systemctl status docker
+
+
+2. GET THE CODE AND CREATE A IMAGE
+git clone https://github.com/RAHAMSHAIK007/netflix-clone.git
+cd netflix-clone
+
+
+vim Dockefile
+
+
+FROM ubuntu
+RUN apt update && apt install apache2 -y
+COPY * /var/www/html/
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+
+
+docker build -t swiggy:v1 .
+
+
+3. CREATE A REPO ON ECR AND PUSH THE SIMAGE
+
+
+ECR -- > CREATE -- > NAME: SWIGGY -- > SCAN IMAGE -- > CREATE REPO
+
+
+View push commands
+NOTE: USE ACCESS KEY AND SECRET KEYS FOR AUTHENTICATION
+RUN ALL THE 4 COMMANDS SETP BY STEP TO PUSH IMAGE TO ECR.
+
+
+
+
+EXPLORE FOLLOWING OPTIONS:
+SCANNING
+PERMISSION
+REPLICATION
+CACHE PULL
+LIFECYCLE
+
+
+
+
+4. CREATE TASK DEFINATION.        
+TASK DEFINATAION -- > CREATE -- > Task definition family: Netflix -- > AWS Fargate -- > ceate a new role -- > VALUES UPTO YOUR CHOICE -- > CREATE
+
+
+
+
+5. CREATE A CLUSTER BY USING FARGETE.
+ECS -- > CLUSTER -- > CREATE -- > NAME -- > 
+AWS Fargate (serverless) -- > CREATE
+
+
+
+
+6. CREATE SERVICE 
+
+
+ECS =-- > CLUSTER --  > SERVICE -- > CREATE -- > FARGATE -- > TASK -- > NETFLIX -- > DESIRED TASKS: 3 -- > LOAD BALANC AND ASG -- > CREATE
+
+
+NOTE: DELETE TASKS BEFORE DELETE CLUSTER.
+
+
+
+
+=========================Session 64 - 18th Nov Project============================================
+
+
+STEP-1: LAUNCH AN INSTANCE WITH T2.LARGE AND EBS 30 ON UBUNTU 24.04
+STEP-2: INSTALL JENKINS, GIT, DOCKER & TRIVY
+
+
+JENKINS:
+#! /bin/bash
+sudo apt update -y
+sudo apt install -y openjdk-17-jdk
+java -version
+
+
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+
+sudo apt update
+sudo apt install jenkins
+sudo apt update -y
+sudo apt install -y jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+
+
+DOCKER:
+apt install docker.io -y
+chmod 777 ///var/run/docker.sock
+
+
+TRIVY:
+wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.tar.gz
+tar zxvf trivy_0.18.3_Linux-64bit.tar.gz
+sudo mv trivy /usr/local/bin/
+echo "export PATH=$PATH:/usr/local/bin/" >> .bashrc
+source .bashrc 
+
+
+
+
+STEP-3: INSTALL THE FOLLOWING JENKINS PLUGINS
+
+
+
+
+PROJECT PIPELINE CODE:
+
+
+pipeline {
+    agent any
+    
+    tools {
+        jdk 'jdk17'
+        nodejs 'node16'
+    }
+    environment {
+        SCANNER_HOME = tool 'mysonar'
+    }
+    stages {
+        stage("Clean WS") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Code") {
+            steps {
+                git "https://github.com/devops0014/Zomato-Project.git"
+            }
+        }
+        stage("Sonarqube Analysis") {
+            steps {
+                withSonarQubeEnv('mysonar') {
+                    sh """$SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectName=zomato \
+                        -Dsonar.projectKey=zomato"""
+                }
+            }
+        }
+        stage("Quality Gates") {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+                }
+            }
+        }
+        stage("Install Dependencies") {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage("OWASP") {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: ' /dependency-check-report.xml'
+            }
+        }
+        stage("Trivy") {
+            steps {
+                sh 'trivy fs . > trivyfs.txt'
+            }
+        }
+        stage("Build") {
+            steps {
+                sh 'docker build -t image1 .'
+            }
+        }
+        stage("Tag & Push") {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-password') {
+                        sh 'docker tag image1 rahamshaik/mydockerprojectfor5pm:myzomatoimage'
+                        sh 'docker push rahamshaik/mydockerprojectfor5pm:myzomatoimage'
+                    }
+                }
+            }
+        }
+        stage("Scan the Image") {
+            steps {
+                sh 'trivy image rahamshaik/mydockerprojectfor5pm:myzomatoimage'
+            }
+        }
+        stage("Container") {
+            steps {
+                sh 'docker run -d --name cont1 -p 3000:3000 rahamshaik/mydockerprojectfor5pm:myzomatoimage'
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+Key Differences
+Feature                OWASP                                SonarQube
+Focus                Web app security risks                Code quality & security
+Type                Security framework/tools        Static code analysis tool
+Approach        Scanning live apps, guidelines        Scanning source code
+Use Cases        Finding web vulnerabilities        Improving code quality, security
+
+
+
+
+CODE   LEVEL SECURITY        : SONARQUBE
+APP     LEVEL SECURITY        : OWASP
+IMAGE  LEVEL SECURITY        : TRIVY
+
+
+
+
+When to Use What?
+Use OWASP when you need security best practices, penetration testing, and live application security assessments.
+
+
+Use SonarQube when you need automated code analysis for vulnerabilities, bugs, and maintainability in your source code.
+
+
+WHAT IS TRIVY: 
+
+
+Trivy is an open-source security scanner for containers, Kubernetes, infrastructure as code (IaC), and dependencies. It helps detect vulnerabilities, misconfigurations, and secrets in various environments.
+
+
+How Trivy Works
+It fetches vulnerability data from sources like NVD, Red Hat, Debian, and GitHub Security Advisories.
+Scans images, filesystems, repositories, or Kubernetes clusters.
+Outputs results in various formats like JSON, table, and SARIF (for security tools).
+
+
+Why Use Trivy?
+✅ Fast & lightweight – Minimal setup and quick scanning.
+✅ Comprehensive – Covers multiple security aspects (CVEs, misconfigurations, secrets).
+✅ Easy integration – Works with Docker, Kubernetes, and CI/CD pipelines.
+
+
+
+
+DEPENENCY CHECK:
+It  is an open source tool performing analysis of 3rd party dependencies; 
+NOTE: false positives and false negatives may exist in the analysis performed by the tool. 
+
+
+Use of the tool and the reporting provided constitutes acceptance for use in an AS IS condition, and there are NO warranties, implied or otherwise, with regard to the analysis or its use. Any use of the tool and the reporting provided is at the user’s risk. In no event shall the copyright holder or OWASP be held liable for any damages whatsoever arising out of or in connection with the use of this tool, the analysis performed, or the resulting report.
+
+
+NOTE: PLEASE CHECK DOCKER PROJECT PDF WHICH IS UPLOADED TO GOOGLE CLASS ROOM
+
+
+

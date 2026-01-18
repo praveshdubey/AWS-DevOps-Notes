@@ -1,0 +1,238 @@
+﻿LAMBDA: ITS A SERVERLESS SERVICES.
+MEANS WE DONT MANAGE SERVERS (AWS WILL MANAGE)
+WE CAN RUN OUR CODE WITHOUT SERVERS.
+IT SUPPORTS MULTIPLE LANGUAGES.
+EVEN WE CAN RUN OUR OWN PROGRAMMING LANGUAGE.
+FIRST 1M requests / month IS FREE.
+PRICING MAY VARY FOR DIFFERNET REGIONS.
+You pay only for the compute time that you consume 
+there is no charge when your code is not running
+
+
+WE CAN USE LAMBDA:
+MOBILE BACKENDS, 
+CHATBOTS, 
+IMAGE & DATA PROCESSING, 
+GAMING APPS, 
+AUTOMATION, 
+NOTIFICATIONS
+
+
+FUNCTION: 
+
+
+It consists of the code you want to run along with configuration details about how the function should execute.
+
+
+TYPES:
+AUTHOR FROM SCRATCH
+USE BLUE PRINT
+USE CONTAINER IMAGE
+
+
+AUTHOR FROM SCRATCH -- > PYTHON -- > CREATE -- > CODE -- > DEPLOY -- > TEST -- >EVENT -- > SAVE -- > TEST
+
+
+BLUE PRINT -- > SCHEDLE PERODIC CHECK -- > Name -- > Create new role -- > Schedule expression: rate(1 minute) -- > create
+
+
+
+
+
+
+CHECKOUT THE CONFIGURATION PART.
+
+
+
+
+EC2 STOP/START:
+name
+python:3.10
+new role for lambda
+create
+
+
+code: https://repost.aws/knowledge-center/start-stop-lambda-eventbridge
+
+
+deploy
+create test event
+test
+
+
+CODE:
+
+
+MANUAL
+CLI
+SCIPT
+CFT
+TERRAFORM
+OPENTOFU
+ANSIBLE
+KOPS
+LAMBDA
+
+
+SERVER CREATION:
+
+
+import boto3
+
+
+def lambda_handler(event, context):
+    ec2 = boto3.client('ec2', region_name='us-east-1')  # Change region as needed
+
+
+    response = ec2.run_instances(
+        ImageId='ami-02457590d33d576c3',  # Example AMI for Amazon Linux 2 in us-east-1
+        InstanceType='t2.micro',
+        MinCount=1,
+        MaxCount=1,
+        KeyName='RKOPSS',  # Replace with your key pair
+        TagSpecifications=[
+            {
+                'ResourceType': 'instance',
+                'Tags': [
+                    {'Key': 'Name', 'Value': 'raham-ec2'}
+                ]
+            }
+        ]
+    )
+
+
+    instance_id = response['Instances'][0]['InstanceId']
+    return {
+        'statusCode': 200,
+        'body': f'EC2 Instance created with ID: {instance_id}'
+    }
+
+
+
+
+STOPPING THE SERVER:
+
+
+import boto3
+region = 'us-east-1'
+instances = ['i-08104dcdec302fa84']
+ec2 = boto3.client('ec2', region_name=region)
+
+
+def lambda_handler(event, context):
+    ec2.stop_instances(InstanceIds=instances)
+    print('stop your instances: ' + str(instances))
+
+
+
+
+import boto3
+region = 'us-east-1'
+instances = ['i-08104dcdec302fa84']
+ec2 = boto3.client('ec2', region_name=region)
+
+
+def lambda_handler(event, context):
+    ec2.start_instances(InstanceIds=instances)
+    print('start your instances: ' + str(instances))
+
+
+
+
+import boto3
+import os
+import json
+
+
+def lambda_handler(event, context):
+    # Initialize S3 client
+    s3 = boto3.client('s3')
+    
+    # Bucket name (can also come from event or environment variables)
+    bucket_name = event.get('bucket_name', 'mybucketformlambdacode')
+    
+    try:
+        # Create S3 bucket
+        s3.create_bucket(Bucket=bucket_name)
+        return {
+            'statusCode': 200,
+            'body': json.dumps(f"Bucket {bucket_name} created successfully.")
+        }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps(f"Error creating bucket: {str(e)}")
+        }
+
+
+
+
+S3 EVENT TRIGGERS:
+https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html
+
+
+
+
+LAMBDA LAYERS:
+
+
+Layers in Lambda used to  manage common code, libraries, and dependencies more efficiently when building serverless applications. 
+it can simplify development, improve maintainability, and enable code reuse across multiple functions.
+
+
+USE CASES:
+
+
+Reusing Common Code
+Enhancing Startup Performance
+Binary Dependencies
+Managing Dependencies
+Supporting Multi-Language Environments
+
+
+
+
+Limitations:
+Layers can be up to 50 MB (zipped) or 250 MB (unzipped).
+Functions must explicitly use the correct layer version.
+The layer must be compatible with the Lambda runtime and architecture (e.g., ARM or x86).
+
+
+
+
+=======================================================================================
+AUTO STOP EC2:
+
+
+
+
+1. CREATE A FUNCTION 
+   RUNTIME=PYTHON EC2=FULL ACCESS
+
+
+import boto3
+
+
+def lambda_handler(event, context):
+    ec2 = boto3.client('ec2')
+    instance_id = 'i-0eb07150c03026558'  # Replace with your EC2 instance ID
+    
+    try:
+        ec2.stop_instances(InstanceIds=[instance_id])
+        print(f'Stopped instance {instance_id}')
+        return {'statusCode': 200, 'body': f'Successfully stopped instance {instance_id}'}
+    except Exception as e:
+        print(f'Error stopping instance {instance_id}: {str(e)}')
+        return {'statusCode': 500, 'body': f'Error stopping instance {instance_id}: {str(e)}'}
+
+
+
+
+DEPLOY THE CODE
+
+
+2. Go to the Amazon EventBridge 
+Click "Create rule" -- > name -- > select "Schedule"
+Under "Schedule pattern", choose "Cron expression"
+Enter the cron expression: 0 22 * * ? * (This represents 10 PM daily)
+select target as lambda -- > function -- >

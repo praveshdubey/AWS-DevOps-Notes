@@ -1,0 +1,110 @@
+===============================session 46=== 27th oct===========================================================
+
+
+
+
+NODE EXPORTER -- > PROMETHEUS -- > GRAFANA -- > WE CAN SEE DATA FROM DASHBOARDS
+
+
+NAME                : PROMETHEUS
+TYPE                : FREE & OPEN SOURCE
+MAJORLY                : CLOUD NATIVE APPLICATIONS
+PURPOSE                : TO MONITOR SERVERS
+WHAT IT MONITORS: METRICS (CPU, RAM, DISK ----)
+STORE DATA        : TSDB [TIME SERIES DATA BASE]
+INTEGRATE        : TO ALEART MANAGER LIKE EMAIL, MOBILE, SLACK --
+PORT                : 9090
+TO SHOW DATA        : PROMQL -- > PROMETHEUS QUERY LANGUAGE
+
+
+TOOL                : NODE EXPORTER
+TYPE                : ITS A DATA SOURCE
+PURPOSE                : TO SEND METRIC FROM WORKER NODE TO PROMETHEUS
+PORT                : 9100
+
+
+
+
+TOOL                : GRAFANA
+TYPE                : FREE & OPEN SOURCE
+PURPOSE                : TO CREATE MONITROING DASHBOARD FOR SERVERS
+PORT                : 3000
+INTEGRATE        : TO ALEART MANAGER LIKE EMAIL, MOBILE, SLACK --
+DEFAULT CREDS        : Username:admin & Password: admin
+
+
+CONNECTION:
+SETUP BOTH PROMETHEUS & GRAFAN FROM BELOW LINK
+https://github.com/RAHAMSHAIK007/all-setups.git
+
+
+PROMETHERUS: 9090
+NODE EXPORTER: 9100
+GRAFANA: 3000
+
+
+DEFAULT USERNAME & PASSWORD: admin
+
+
+CONNECTING PROMETHEUS TO GARAFANA:
+connect to grafana dashboard -- > Data source -- > add -- > promethus -- > url of prometheus -- > save & test -- > 
+
+
+CREATING DASHBOARD:
+top of page -- > click on + symbol -- > import dashboard -- > 1860 -- > laod --- > prometheus -- > import 
+
+
+TO GIVE LOAD:
+yum install stress -y
+stress -c 4
+
+
+
+
+CONNECTION TO WORKER NODES
+1. CREATE 2 WORKRER NODES
+2. GO TO MONITORING SERVER [vim /etc/hosts] ADD IP OF YOUR WORKER NODES
+
+
+public-ip node1  worker-1
+public-ip node2  worker-2
+
+
+3. INSTALL NODE EXPORTER {WITHOUT NODE EXPORTER WE CANT MONITOR WORKER-NODES}
+
+
+TO ADD MORE SERVERS 
+vim /etc/prometheus/prometheus.yml
+targets -- > add new node
+
+
+NOTE: AFTER MODIFIYING PROPERTY OF ANY SERVERCIE WE NEED TO RESTART.
+systemctl restart prometheus.service
+
+
+SHARING DASHBOARD:
+SHARE -- > CREATE SNAPSHOT -- > SHARE THE URL (NOTE REPLACE LOCALHOST=PUBLICIP)
+
+
+IDS:
+1860
+10180
+14731
+11074
+8919
+
+
+PROMETHEUS: METRICS
+LOKI& PROMTAIL: LOGS
+GRAFANA        : DASHBOARDS
+
+
+ELASTIC SEARCH        : LOGS, METRICS
+KIBANA                : DASHBOARDS
+
+
+
+
+
+
+http://3.80.186.220:3000/dashboard/snapshot/vsz6bR9H8xxj4jawviQsprffK1fFN0Dr

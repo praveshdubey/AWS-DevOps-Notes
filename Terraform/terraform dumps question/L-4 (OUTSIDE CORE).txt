@@ -1,0 +1,110 @@
+1. How to create workspace called Production
+Ans: terraform workspace new Production
+
+2. commands to switch to the dev workspace?
+Ans: terraform workspace select dev
+	
+3. How to import manually created resources to terraform, without impacting them ?
+ANS: use terraform import or the import block to import the existing resources under Terraform management
+
+4. A virtual machine was provisioned during a recent deployment, but a local script did not work correctly. As a result, the virtual machine needs to be destroyed and recreated. How Terraform recreate the one resource without having to destroy everything that was created?
+ANS: taint/replace 
+
+5. What tasks can the terraform state command be used for in Terraform?
+ANS: modify the current state, such as removing items
+
+6. When working with Terraform CLI/OSS workspaces, what command can you use to display the current workspace you are working in?
+ANS: terraform workspace show
+
+7. Your colleague provided you with a Terraform configuration file and you're having trouble reading it because parameters and blocks are not properly aligned. What command can you run to quickly update the file configuration file to make it easier to consume?
+ANS: TERRAFORM FMT
+
+8.What command can be used to display the resources that are being managed by Terraform?
+ANS: terraform show
+
+9.You need to enable logging for Terraform and persist the logs to a specific file. What two environment variables can be set to enable logs and write them to a file?
+ANS: 
+TF_LOG_PATH="<file_path>"
+TF_LOG=TRACE
+
+10. After deploying a new virtual machine using Terraform, you find that the local script didn't run properly. However, Terraform reports the virtual machine was successfully created. How can you force Terraform to replace the virtual machine without impacting the rest of the managed infrastructure?
+
+ANS: use terraform apply -replace to tag the resource for replacement
+
+11. You are having trouble with executing Terraform and want to enable the most verbose logs. What log level should you set for the TF_LOG environment variable?
+ANS: TRACE
+
+12. You are managing multiple resources using Terraform running in AWS. You want to destroy all the resources except for a single web server. How can you accomplish this?
+ANS: Run a terraform state rm to remove it from state and then destroy the remaining resources by running terraform destroy
+
+13. You need to ensure your Terraform is easily readable and follows the HCL canonical format and style. In the current directory, you have a main.tf that calls modules stored in a modules directory. What command could you run to easily rewrite your Terraform to follow the HCL style in both the current directory and all sub-directories?
+
+ANS: terraform fmt -recursive
+
+14. CAN the terraform import command will automatically update the referenced Terraform resource block after the resource has been imported to ensure consistency
+ANS: FALSE
+
+15. Steve is a developer who is deploying resources to AWS using Terraform. Steve needs to gather detailed information about an EC2 instance that he deployed earlier in the day. What command can Steve use to view this detailed information?
+ANS: terraform state show aws_instance.frontend
+
+
+16. After running terraform apply, you notice some odd behavior and need to investigate. Which of the following environment variables will configure Terraform to write more detailed logs to assist with troubleshooting?
+ANS: TF_LOG=TRACE
+
+17. You need Terraform to destroy and recreate a single database server that was deployed with a bunch of other resources. You don't want to modify the Terraform code. What command can be used to accomplish this task?
+ANS: terraform apply -replace="aws_instance.database"
+
+
+18. Michael has deployed many resources in AWS using Terraform and can easily update or destroy resources when required by the application team. A new employee, Dwight, is working with the application team and deployed a new EC2 instance through the AWS console. When Michael finds out, he decided he wants to manage the new EC2 instance using Terraform moving forward. He opens his terminal and types:
+
+$ terraform import aws_instance.web_app_42 i-b54a26b28b8acv7233
+
+However, Terraform returns the following error: Error: resource address "aws_instance.web_app_42" does not exist in the configuration.
+
+What does Michael need to do first in order to manage the new Amazon EC2 instance with Terraform?
+
+ANS: 
+create a configuration for the new resource in the Terraform configuration file, such as:
+
+resource "aws_instance" "web_app_42" {
+  # (resource arguments)
+}
+
+19. Jeff is a DevOps Engineer for a large company and is currently managing the infrastructure for many different applications using Terraform. Recently, Jeff received a request to remove a specific VMware virtual machine from Terraform as the application team no longer needs it. Jeff opens his terminal and issues the command:
+
+The next time that Jeff runs a terraform apply, the resource is not marked to be deleted. In fact, Terraform is stating that it is creating another identical resource.
+
+ANS: Jeff removed the resource from the state file, and not the configuration file. Therefore, Terraform is no longer aware of the virtual machine and assumes Jeff wants to create a new one since the virtual machine is still in the Terraform configuration file
+
+20. Which of the following Terraform CLI commands are valid? (select five)
+ANS:
+
+$ terraform login
+$ terraform workspace select
+$ terraform fmt
+$ terraform initialize  : FALSE
+$ terraform show 
+$ terraform delete      : FALSE
+$ terraform apply -refresh-only
+
+21. Pam just finished up a new Terraform configuration file and has successfully deployed the configuration on Azure using Terraform open-source. After confirming the configuration on Azure, Pam changes to a new workspace and then heads to lunch. When she arrives back at her desk, Pam decides to destroy the resources to save on cost. When Pam executes a terraform destroy, the output indicates there are no resources to delete.
+
+Why can't Pam delete the newly created resources in Azure?
+
+ANS: there is no Terraform state in the current workspace she is working in
+
+
+22. using terraform import, import the existing infrastructure to bring the resources under Terraform management
+ANS: TRUE
+
+23. What does the command terraform fmt do?
+ANS: rewrite Terraform configuration files to a canonical format and style
+
+
+24. Which Terraform command will force a resource to be destroyed and recreated even if there are no configuration changes that would require it?
+
+ANS: terraform apply -replace=<address>
+
+25. After running into issues with Terraform, you need to enable verbose logging to assist with troubleshooting the error. Which of the following values provides the MOST verbose logging?
+ANS: TRACE
+

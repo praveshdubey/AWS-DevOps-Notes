@@ -1,0 +1,117 @@
+1. By default, how many resources will Terraform provision concurrently during a terraform apply?
+ANS: 10 
+
+2. Which Terraform command will check and report errors within modules, attribute names, and value types to ensure they are syntactically valid and internally consistent?
+ANS: terraform validate
+
+3. True or False? By default, the terraform destroy command will prompt the user for confirmation before proceeding.
+ANS: True
+
+4. How to check code will give proper output before we execute that 
+terraform plan
+
+5. True or False? Running a terraform apply will fail if you do not run a terraform plan first.
+ANS: False
+
+6. you've created a new Terraform configuration from scratch and now you want to test it. Before you can provision the resources, what is the first command that you should run?
+ANS: terraform init
+
+7. Which of the following are tasks that terraform apply can perform? (select three)
+ANS:
+import existing infrastructure: FALSE
+destroy infrastructure previously deployed with Terraform: TURE
+provision new infrastructure: TURE
+update existing infrastructure with new configurations: TURE
+
+8. True or False when we run terraform init downloads plugins and retrieves the source code for referenced modules ?
+ANS: TRUE
+
+9. You have infrastructure deployed with Terraform. A developer recently submitted a support ticket to update a security group to permit a new port. To satisfy the ticket, you update the Terraform configuration to reflect the changes and run a terraform plan. However, a co-worker has since logged into the console and manually updated the security group to the same configuration.
+
+What will happen when you run a terraform apply?
+
+ANS:  Nothing will happen. Terraform will validate the infrastructure matches the desired state.
+
+
+10. The command terraform destroy is actually just an alias to which command?
+ANS: 
+
+terraform plan - destroy
+terraform delete
+terraform apply -destroy: TRUE
+terraform apply -replace-all
+
+11. True or False? terraform validate will validate the syntax of your HCL files.
+ANS: TRUE
+
+12. After running a terraform init, how can Raham perform a dry run to ensure Terraform will create the right resources without deploying real-world resources?
+ANS: run terraform plan -out=raham
+
+13. You are working on updating your infrastructure managed by Terraform. Before lunch, you update your configuration file and run a terraform plan to validate the changes. While you are away, a colleague manually updates a tag on a managed resource directly in the console (UI).
+
+What will happen when you run a terraform apply?
+
+ans: Before applying the new configuration, Terraform will refresh the state and recognize the manual change. It will update the resource based on the desired state as configured in the Terraform configuration. The manual change will no longer exist.
+
+
+14. What CLI commands will completely tear down and delete all resources that Terraform is currently managing? (select two)
+ANS:
+
+terraform apply -destroy	: True
+terraform apply -delete
+terraform destroy		: True
+terraform plan -destroy
+
+15. You have created a new workspace for a project and added all of your Terraform configuration files in the new directory. Before you execute a terraform plan, you want to validate the configuration using the terraform validate command. However, Terraform returns the error:
+
+$ terraform validate
+Error: Could not load plugin
+
+ans: the directory was not initialized
+
+16. When running the terraform validate command, which issue will be brought to your attention?
+
+ans:
+a variable is being used in a resource block but has not been declared: True
+there is configuration drift within the managed infrastructure
+there is no existing state file for the configuration
+parameters inside of a resource block are not lined up with spaces
+
+17. Philip works at a payment processing company and manages the organization's VMware environment. He recently provisioned a new cluster for a production environment. To ensure everything is working as expected, Philip has been using Terraform and the VMware vSphere client to create and destroy new virtual machines. Currently, there are three virtual machines running on the new cluster, so Philip runs terraform destroy to remove the remaining virtual machines from the cluster. However, Terraform only removes two of the virtual machines, leaving one virtual machine still running.
+
+Why would Terraform only remove two of the three virtual machines?
+
+ans: the remaining virtual machine was not created by Terraform, therefore Terraform is not aware of the virtual machine and cannot destroy it
+
+18. When running a terraform plan, how can you save the plan so it can be applied at a later time?
+ans: use the -out flag
+
+19. What happens when you apply a Terraform configuration using terraform apply? (select two)
+
+Terraform formats your configuration to the standard canonical format and style
+Terraform downloads any required plugins
+Terraform makes infrastructure changes defined in your configuration: True
+Terraform recreates all the infrastructure defined in the configuration file
+Terraform updates the state file with configuration changes made during the execution: True
+
+
+20. What function does the terraform init -upgrade command perform?
+ANS: update all previously installed plugins and modules to the newest version that complies with the configuration’s version constraints
+
+21. What are the core Terraform workflow steps to use infrastructure as code?
+
+ANS:
+1) Write
+2) Plan
+3) Apply
+
+22. What happens when a terraform apply command is executed?
+ANS: applies the changes required in the target infrastructure in order to reach the desired configuration
+
+23. After executing a terraform plan, you notice that a resource has a tilde (~) next to it. What does this mean?
+ANS: the resource will be updated in place
+
+24. Raham is writing brand new code and needs to ensure it is syntactically valid and internally consistent. he doesn't want to wait for Terraform to access any remote services while making sure his code is valid. What command can he use to accomplish this?
+ANS: terraform validate
+
+

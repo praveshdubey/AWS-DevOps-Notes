@@ -1,0 +1,159 @@
+1. IMPORTANT POINTS:
+by default, state is stored in a file named terraform.tfstate in the current working directory
+it may contain sensitive data that you might not want others to view
+remote state is required when more than one person wants to manage the infrastructure managed by Terraform
+the state file is formatted using JSON
+By defaul tTerraform CLI store its state in the terraform.tfstate file on the local backend
+By default, Terraform OSS stores its state file in local backend.
+Any sensitive values referenced in the Terraform code, even as variables, will end up in plain text in the state file.
+
+
+
+2.  state should be modified by editing the file directly ?
+ANS: FALSE
+
+3. Beyond storing state, what capability can an enhanced storage backend, such as the remote backend, provide your organization?
+ANS: execute your Terraform on infrastructure either locally or in Terraform Cloud
+
+4. Your organization has multiple engineers that have permission to manage Terraform as well as administrative access to the public cloud where these resources are provisioned. If an engineer makes a change outside of Terraform, what command can you run to detect drift and update the state file?
+ANS: 
+terraform apply -refresh-only
+
+5. Where is the most secure place to store credentials when using a remote backend?
+ANS: defined outside of Terraform
+
+6. Both you and a colleague are responsible for maintaining resources that host multiple applications using Terraform CLI. What feature of Terraform helps ensure only a single person can update or make changes to the resources Terraform is managing?
+ANS: state locking
+
+7. True or False? In order to use the terraform console command, the CLI must be able to lock state to prevent changes.
+ANS: True
+
+8. After using Terraform locally to deploy cloud resources, you have decided to move your state file to an Amazon S3 remote backend. You configure Terraform with the proper configuration as shown below. What command should be run in order to complete the state migration while copying the existing state to the new backend?
+
+terraform {
+  backend "s3" {
+    bucket = "tf-bucket"
+    key = "terraform/abcd/"
+    region = "us-east-1"
+  }
+}
+
+ANS: terraform init -migrate-state
+
+9. Your team is using Terraform, and multiple team members need to be able to manage the infrastructure. You need to support state locking to reduce the chance of corrupting the state file. What backends can you use to meet these requirements? (select three)
+
+ANS:
+s3 backend (with DynamoDB): True
+kubernetes backend: True
+consul backend: True
+local backend: False
+
+10. Which common action does not cause Terraform to refresh its state?
+ANS: 
+terraform plan
+terraform apply
+terraform destroy
+terraform state list: TRUE
+
+11. If supported by your backend, Terraform will lock your state for all operations that could write state. What purpose does this serve?
+ANS: This prevents others from acquiring the lock and potentially corrupting your state.
+
+
+12. You are worried about unauthorized access to the Terraform state file since it might contain sensitive information. What are some ways you can protect the state file? (select two)
+
+ANS: 
+
+Enable native encryption in Terraform as configured in the terraform block
+use the S3 backend using the encrypt option to ensure state is encrypted: True
+replicate the state file to an encrypted storage device
+store in a remote backend that encrypts state at rest: True
+
+13. True or False? In most cases, you can move Terraform state between supported backends at any time, even after running your first terraform apply.
+ANS: TRUE
+
+14. Rather than storing them in Creds in plaintext, where should you store the credentials for the remote backend? (select two)
+ANS: 
+
+use a variable
+credentials file: Ture
+environment variables: True
+on the remote system
+
+15. Which of the following commands can be used to detect configuration drift?
+ANS: terraform apply -refresh-only
+
+16. You have a Terraform configuration file with no defined resources. However, there is a related state file for resources that were created on AWS. What happens when you run a terraform apply?
+ANS: Terraform will destroy all of the resources
+
+
+17. What happens if multiple users attempt to run a terraform apply simultaneously when using a remote backend? (select two)
+ANS:
+
+if the backend supports locking, the first terraform apply will lock the file for changes, preventing the second user from running the apply: TRUE
+the Terraform apply will work for both users
+both users will get an error
+if the backend does not support locking, the state file could become corrupted: TRUE
+
+18. True or False? A remote backend configuration is required for using Terraform.
+ANS: FALSE
+
+19. Ralphie has executed a terraform apply using a complex Terraform configuration file. However, a few resources failed to deploy due to incorrect variables. After the error is discovered, what happens to the resources that were successfully provisioned?
+ANS: the resources that were successfully provisioned will remain as deployed
+
+20. You have a Terraform configuration file defining resources to deploy on VMware, yet there is no related state file. You have successfully run terraform init already. What happens when you run a terraform apply?
+ANS: Terraform will scan the VMware infrastructure, create a new state file, and deploy the new resources as defined in the configuration file.
+
+
+21. True or False? You can migrate the Terraform backend but only if there are no resources currently being managed.
+ANS: FALSE
+
+22. When multiple engineers start deploying infrastructure using the same state file, what is a feature of remote state storage that is critical to ensure the state does not become corrupt?
+ANS: state locking
+
+23. What are some of the features of Terraform state? (select three)
+
+ANS:
+
+mapping configuration to real-world resources: TRUE
+determining the correct order to destroy resources: TRUE
+inspection of cloud resources
+increased performance: TRUE
+
+24. What Terraform command can be used to inspect the current state file?
+ANS: terraform show
+
+
+25. Which of the following best describes the default local backend?
+ANS: The local backend stores state on the local filesystem, locks the state using system APIs, and performs operations locally
+
+26. COMMAND TO RENAME STATE FILE OBJECT ?
+ANS: terraform state mv aws_instance.one aws_instance.two
+
+27. What Terraform command can be used to manually unlock the state for the defined configuration?
+AN: terraform force-unlock
+
+28. A "backend" in Terraform determines how state is loaded and how an operation such as apply is executed. Which of the following is not a supported backend type?
+ANS: \
+GitHub: True
+s3
+consul
+local
+
+29. Where does Terraform Community (Free) store the local state for workspaces?
+ans: directory called terraform.tfstate.d/<workspace name>
+
+30. True or False? The terraform plan -refresh-only command is used to create a plan whose goal is only to update the Terraform state to match any changes made to remote objects outside of Terraform.run a terraform state rm command to remove the Cloud SQL instance from Terraform management before running the terraform destroy command
+
+
+ANS: True
+
+31. Raham and his co-worker Raju are deploying resources in GCP using Terraform for their team. After resources have been deployed, they must destroy the cloud-based resources to save on costs. However, two other team members, Michael and Chucky, are using a Cloud SQL instance for testing and request to keep it running.
+
+How can Raham and raju destroy all other resources without negatively impacting the database?
+
+ans: run a terraform state rm command to remove the Cloud SQL instance from Terraform management before running the terraform destroy command: True
+take a snapshot of the database, run a terraform destroy, and then recreate the database in the GCP console by restoring the snapshot
+delete the entire state file using the terraform state rm command and manually delete the other resources in GCP
+
+
+

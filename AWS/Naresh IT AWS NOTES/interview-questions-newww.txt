@@ -1,0 +1,307 @@
+﻿1. What is git & Why do we need to use it?
+2. Difference between Distributed vs Centralized version control system?
+3. What is RollBack & How to do RollBack ?
+4. Explain stages/Architecture of Git ?
+5. What is Local Repo ?
+6. What is Git Branch ?
+7. What is default branch in git ?
+8. Difference blw Git & GitHub ?
+9. Difference blw git clone vs git fork ?
+10. Difference blw git merge vs git rebase ?
+11. Difference blw git merge vs git revert ?
+12. Difference blw git pull vs git fetch ?
+13. Difference blw git pull vs git clone ?
+14. Difference blw git pull vs git push ?
+15. what is git cherry-pick & .git ignore & git restore & stash ?
+16. Difference blw git merge vs git cherry-pick ?
+17. what is maven ?
+18. Types of Artifacts ?
+19. what is POM.XML ?
+20. What is maven Homepath ?
+21. Explain maven lifecycle ?
+22. What is a Goal and how it will work ?
+23. What is the Differenc blw Maven & ant ?
+24. What is CI/CD ?
+25. what is Pipeline ?
+26. Explain about Jenkins ?
+27. What is workspace and how to create custom workspace ?
+28. Explain the process of integration Github withh Jenkins ?
+29. What is jenkins Port Number ?
+30. What is variables in jenkins and how many types ?
+31. What is Build executors in jenkins ?
+32. How to run multiple builds at same time in jenkins ?
+
+
+30. How to schedule work in jenkins ?
+31. Explain Cron syntax.
+32. What is PollScm?
+33. Explain about webhooks ?
+34. Explain about Pipelines ?
+35. Types of Pipelines & Difference blw them ?
+36. What is Multi-stage pipeline ?
+37. what is pipeline As a Code ?
+38. what is Input parameter in pipeline ?
+39. Explain about Master and slave configuration ?
+40. How to reduce load on Jenkins server ?
+41. What is Build Executors ?
+42. What is Agent in jenkins master & slave ?
+43. What is Label in jenkins ?
+44. What is Nexus and Explain about it ?
+45. What is Tomact and Explain about it ?
+46. Path to deploy war & jar files in Tomact ?
+47. How do you restartic users in Jenkins ?
+48. Explain about Linked jobs ?
+49. EXPLAIN JENKINS DEPLOYMENT PROCESS ?
+50. Explain Parameters in jenkins ?
+51. What is Jenkinsfile ?
+52. What is Ansible ?
+53. Explain Ansible architecture ?
+54. what is Ansible Inventory file ?
+55. Types of Ansible inventory file ?
+56. How to establish connection blw ansible and worker nodes ?
+57. What is Agent less ?
+58. What is Adhoc commands ?
+59. What is a Module ?
+60. Explain any few moudles you know ?
+61. How to execute multiple modules ?
+62. What is a playbook ?
+63. What is yaml and explain it ?
+64. what is Gather facts in ansible ?
+65. what is a task in ansible ?
+66. command to run playbook ?
+67. How to skip erros in playbook ?
+68. What is Tags in playbook ?
+69. Explain variables in a playbook ?
+70. What is ansible conditions ?
+71. what is handlers in a playbook ?
+72. Why to use loops in playbook ?
+73. what is LAMP stack ?
+74. How to get complete info of worker nodes ?
+75. What is Debug module ?
+76. what is LookUp module ?
+77. what is IN-Line module ? (to change a specific line of a file in worker node)
+78. What is Jinja2 Template ?
+79. Explain Ansible Vault ?
+80. Explain Ansible Roles ?
+81. Explain Ansible Galaxy ?
+82. Explain Ansible PIP Module ?
+83. What is Shell, Command, Raw modules ?
+84. How to restrict the tasks for specific time in playbook ?
+85. What is Ansible Tower ?
+86. What is Monlithic & Micro services ?
+87. Limitations of Monolithic ?
+88. What is a container ?
+89. what is a docker image ?
+90. what is containerization ?
+91. Explain Docker Architecture & Components of Docker ?
+92. What is Docker Daemon ?
+93. How to download docker images ?
+95. How to create conatiner ?
+96. What is OS-level of Virtualization ?
+97. What is Dockerfile and why to use it ?
+98. Explain Dockerfile components ?
+99. What is differece blw RUN vs CMD ?
+100. What is differece blw ENTRYPOINT vs CMD ?
+101. What is differece blw COPY vs ADD ?
+102. What is differece blw ENV vs ARGS ?
+103. How to run the Dockerfile ?
+104. What is A docker volume ?
+105. what is Docker volume mounting ?
+106. Homepath for Docker Components ?
+107. What is a layer in image ?
+108. How to allocate CPU & RAM for containers ?
+109. What is Compose and why to use it ?
+110. How to change default compose file ?
+111. What is DockerHub ?
+112. How to store images on Dockerhub ?
+113. What is Dockerswarm ?
+114. What is Service in Dockerswarm ?
+115. How manager is connecting to worker in Dockerswarm ?
+116. What is Port number for Dockerswarm ?
+117. What is self healing in conntainers ?
+118. What is Network in Docker & Types of Network ?
+119. Differences Blw Bridge and Overlay networks ?
+120. Difference blw attach & exec ?
+121. Difference blw stop & kill ?
+122. What is Docker prune command ?
+123. How to see cup and ram utilization of Conatiners ?
+124. How to see storage of containers, images and volumes ?
+125. What is Dockerstack ?
+126. What is Kubernetes ?
+127. Difference blw Docker Swarm & Kubernetes ?
+128. Explain Kubernetes Architecture ?
+129. Explain master node and worker node components in Kubernetes ?
+130. What is Kubectl ?
+131. How many types of Kubernetes cluster we have ?
+132. What is a Pod in Kubernetes ?
+133. what is minikube and what are the requirments for setup ?
+134. In Kubernetes how many ways we can create resources ?
+134. what is ReplicaSet in Kubernetes ?
+135. what is Deployment in Kubernetes ?
+136. what is Difference blw ReplicaSet & Deployment in Kubernetes ?
+137. what is Rollout in Kubernetes ?
+139. what is Namespaces in Kubernetes & why we need to use it ?
+140. What are types of services in k8s ?
+141. differnece blw ClusterIp vs NodePort vs LoadBalancer ?
+142. What is scaling and what is HPA in K8s ?
+143. What is a metric server in k8s ?
+144. How you get metrics of nodes and pods ?
+145. Difference blw HPA VS VPA ?
+146. what is DaemonSet ?
+147. Difference blw Deployment and DaemonSet ?
+148. Difference blw ReplicaSet and ReplicationController ?
+149. MAX NODES: 5000, MAX PODS: 1,50,000 MAX PODS PER NODE: 110 ?
+What is resource quotas in kubernetes it is and what is rbac ?
+what is helmschart and why we need to use it ?
+What is Prometheus Grafana and node exporter explain them briefly ?
+How to create the dashboards in grafana ?
+
+
+TERRAFORM:
+What is terraform and why use it ? 
+What is infra as a code ?
+Describe the advantages of using terraform ?
+How to provide authentication for terraform to create resource ?
+What is terraform syntax ?
+What is variables in terraform and in how many ways we can pass variables to terraform ?
+What is the purpose of using TF var files ?
+What is locals block in terrafrom ?
+what is dynamic block in terrafrom ?
+what is provider block in terrafrom ?
+what is output block in terrafrom ?
+what is resource block in terraform ?
+What is terraform workspaces and why we need to use it ?
+Expand the comments of Terraform Workspace ?
+What is back end setup in terraform and why it is important ?
+
+
+What is the state file in terraform and what is the purpose of maintaining it safely ?
+What is version constraint in terraform ?
+What is the difference between count and for each in terraform ?
+What is the difference between set and list terraform ?
+What is depends on in terraform ?
+What are the life cycle rules of meta arguments in terraform ?
+What is  modules in terraform ?
+How many types of provider categories we have on terraform ?
+What are the types of providers we have on terraform ?
+How do you recreate a specific object in terraform ?
+How do you delete a specific object in terraform ?
+What are the comments in terraform ?
+What is Alias and providers in terraform ?
+What is state locking in terraform and why it will happen ?
+What is terraform cloud ?
+What is terraform vault ?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AWS QUESTIONS ?
+1. What is Cloud ?
+2. What are types of Clouds in market ?
+3. What is EC2 and explain processs of creation ?
+4. What is ELB ?
+5. Types of LoadBalancers?
+6. Explain about Application LoadBalancer ?
+7. What is diff blw internet and internal LoadBalancer ?
+8. What is Listener rule in LoadBalancer ?
+9. Which algrithm we used on LoadBalancer ?
+10. What is Target Group in LoadBalancer ?
+11. what is ebs volume and why we need to use it ?
+12. what is diff blw Root volume and Non-Root volume ?
+13. Types of EBS volume ?
+14. What is a Snapshot ?
+15. How to migrate sever form one region to another region ?
+16. what is the process of creation AMI from existing server ?
+17. What is Min and Max storage of EBS ?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ASSIGNMENT-1 (JENKINS) :
+CRATE 1 MASTER AND 2 SLAVES
+CREATE 2 JOBS 
+JOB-1: CI IN FREE STYLE
+JOB-2: CI IN PIPELINE
+JOB-1 NEED TO EXECUTE ON SLAVE-1
+JOB-2 NEED TO EXECUTE ON SLAVE-2
+WHEN YOU RUN JOB-1 THEN AUTOMATICALLY JOB-2 NEED TO RUN
+BUT: JOB-1 NEED TO RUN AUTOMATICALLY
+YOU CAN BUILD JOB-1 MANUALLY
+
+
+
+
+ASSIGNMENT-2 (ANSIBLE):
+
+
+CREATE A 5-NODE CLUSTER
+CREATE A index.html file IN ANSIBLE SERVER
+CREATE A PLAYBOOK WITH FOLLOWING TASKS: NOTE: Playbook need to run on all servers
+1. install httpd (if your servers are dev then install)
+2. create 5 users on worker nodes
+3. copy the index.html to the web server path
+4. Print the cont what you written on index.html
+
+
+OPT: all of the above tasks need to be performed from roles conecpt.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+======================================================
+
+
+Q1. WHAT IS PORT NUMBER FOR WEB-SERVER ?
+A: 80
+
+
+Q2. WHAT IS PATH  FOR WEB-SERVER ?
+A: cd /var/www/html
+
+
+Q3. WHAT IS BASIC FILE FOR WEB-SERVER ?
+A: index.html
+
+
+Q4. IF WEB-SERVER IS NOT SHOWING APP TO USER WHAT WE DO FIRSTLY.
+A: CHECK PORT NUMBERS, CHECK THE SERVIVE IS RUNNING OR NOT
+
+
+Q5. TELL ME FEW REAL TIME MOST USED WEB-SERVERS ?
+A:  APACHE, NGINX, IIS ----------------------

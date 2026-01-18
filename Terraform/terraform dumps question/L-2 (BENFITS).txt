@@ -1,0 +1,61 @@
+1. Rather than use a state file, Terraform can inspect cloud resources on every run to validate that the real-world resources match the desired state. 
+ANS: False
+
+2. What feature does Terraform use to map configuration to resources in the real world?
+ANS: STATEFILE
+
+3. Rather than having to scan and inspect every resource on every run, Terraform relies on what feature to help manage resources?
+ANS: STATEFILE
+
+4. Under special circumstances, Terraform can be used without state ?
+ANS: False
+
+5. Can Terraform can manage dependencies within a single cloud, but not cross-cloud
+ANS: False
+
+6. You have deployed your network architecture in AWS using Terraform. A colleague recently logged in to the AWS console and made a change manually and now you need to be sure your Terraform state reflects the new change. What command should you run to update your Terraform state?
+ANS: terraform apply -refresh-only
+
+
+7. Which of the following are true about Terraform providers? (select four)
+
+some providers are maintained by HashiCorp : TRUE
+providers can be written and maintained by an outside organization, such as AWS, F5, or Microsoft : TRUE
+they allow anybody to write a provider and publish it to the registry : TRUE
+some providers are community-supported : TRUE
+all providers are automatically included when downloading Terraform : False
+
+8. Which of the following is not true about the terraform.tfstate file used by Terraform?
+
+it always matches the infrastructure deployed with Terraform : FALSE
+it is recommended not to modify the file directly : TRUE
+the file includes information about each resource managed by Terraform : TRUE
+the file can potentially contain sensitive values : TRUE
+
+9. Your organization has standardized on Microsoft Azure to run its applications on PaaS, SaaS, and IaaS offerings. The deployment quickly standardized on Azure ARM to provision these resources quickly and efficiently.
+Which of the following is true about how the team currently deploys its infrastructure?
+
+the adoption of another public cloud provider will prove to be more challenging since all of its codebase is based on ARM : TRUE
+the team would not be able to use its existing skill set to develop code for newly announced services
+the team would not be able to quickly adapt and integrate baseline security measures in its code to help standardize application deployments
+the team would not be able to develop reusable code in order to reduce the time it takes to develop code for new applications
+
+
+11. state can be disabled when deploying to multiple clouds to prevent sensitive data from being shared across cloud platforms
+ANS: FALSE 
+
+12. Using multi-cloud and provider-agnostic tools provides which of the following benefits? (select two)
+s
+
+can be used across major cloud providers and VM hypervisors : TRUE
+operations teams only need to learn and manage a single tool to manage infrastructure, regardless of where the infrastructure is deployed : TRUE
+increased risk due to all infrastructure relying on a single tool for management
+slower provisioning speed allows the operations team to catch mistakes before they are applied
+
+
+13. ADVANTAGES OF STATE-FILE:
+provides a one-to-one mapping of the configuration to real-world resources
+increases performance by reducing the requirement to query multiple resources at once
+determines the dependency order for deployed resources
+the state file can be stored in Azure but provision applications in AWS
+

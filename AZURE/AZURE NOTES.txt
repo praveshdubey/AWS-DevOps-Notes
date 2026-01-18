@@ -278,7 +278,7 @@ STEP-3: CONNECT TO DB
 database -- > connection string --- > PostgreSQL connection URL
 
 HARD METHOD:
-psql "host=database01foraz.postgres.database.azure.com port=5432 dbname=database01foraz user=admin123 password=Demo@#123 sslmode=require"
+
 
 EASY METHOD:
 DATABASE
